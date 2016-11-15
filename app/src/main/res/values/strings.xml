@@ -2,10 +2,12 @@
     <string name="app_name">Alpha</string>
     <string name="user_name">用户名</string>
     <string name="user_password">密码</string>
+    <string name="phone_number">手机号码</string>
     <string name="login">登录</string>
     <string name="new_user">新用户</string>
-    <string name="user_name_error">用户名不合法，3到20位，首字母必须是字母</string>
-    <string name="user_password_error">密码不合法，3到20位数字</string>
+    <string name="phone_number_error">手机号码不正确，请输入正确的手机号码</string>
+    <string name="user_name_error">用户名不合法，3到20位，首字符必须是字母</string>
+    <string name="user_password_error">密码不合法，4到15位数字、字母或者下划线，首字符必须是字母。</string>
     <string name="register">注册</string>
     <string name="user_password_confirm">确认密码</string>
     <string name="user_password_confirm_error">密码不一致</string>
