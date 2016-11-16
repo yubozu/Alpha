@@ -16,4 +16,51 @@
     <string name="logining">登录中...</string>
     <string name="login_success">登录成功</string>
     <string name="login_failed">登录失败</string>
+    <!--Main Activity-->
+    <string name="info_title">您的个人信息</string>
+    <string name="start_evaluate">开始评估</string>
+    <string name="info_gender">性别</string>
+    <string name="info_birthday">出生日期</string>
+    <string name="click_to_pick_date">点击选择日期</string>
+    <string name="change_info">修改个人信息</string>
+    <string name="save_info">保存个人信息</string>
+    <string name="image_description">logo</string>
+    <string name="logout">登出</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="must_input_gender">您的性别有助于提高评估准确率，请进行输入</string>
+    <string name="must_input_birthday">您的出生日期有助于提高评估准确率，请进行输入</string>
+    <string name="must_save_info">您的性别和出生日期有助于提高评估准确率，请进行保存后开始评估</string>
+    <string-array name="gender">
+        <item>女</item>
+        <item>男</item>
+    </string-array>
+
+    <!--medicine-->
+    <string name="medicine_info">用药情况</string>
+    <string name="taken_medicine">正在服用治疗帕金森病药物：</string>
+    <string name="last_taken_time">距离上一次服药时间：</string>
+    <string name="tip">注意事项！\n本评估共由6项测试组成，共约需要20分钟。为保证评估准确性，请尽量按照相应要求完成全部测试。\n请您在评估过程中保证自身安全，如有必要，需有人陪同完成此次评估！</string>
+    <string name="start">开始</string>
+    <string name="must_input_time">请选择上次服药时间</string>
+    <string name="must_read_tip">请仔细阅读注意事项</string>
+    <string-array name="time">
+        <item>未选择</item>
+        <item>不到15分钟</item>
+        <item>大约15分钟</item>
+        <item>大约30分钟</item>
+        <item>大约45分钟</item>
+        <item>大约1小时</item>
+        <item>超过1小时</item>
+    </string-array>
+
+    <!--result-->
+    <string name="result_show">测试结果</string>
+    <string name="guide_info">恭喜你，本次共完成了%1$d项测试，进行了%2$d分钟。各项测试初步结果如下所示。</string>
+    <string name="evaluate_self">请对本次评估进行自我评价</string>
+    <string name="test_name">测试名称：</string>
+    <string name="start_time">开始时间：</string>
+    <string name="end_time">结束时间：</string>
+    <string name="score">得分：</string>
+
 </resources>

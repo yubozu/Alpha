@@ -9,7 +9,7 @@ import cn.ac.ict.alpha.activities.LoginActivity;
  */
 
 public class LoginPresenter {
-    public static final String TAG = "LoginPresenterImpl";
+    public static final String TAG = "LoginPresenter";
 
     public LoginActivity mLoginView;
 
