@@ -22,7 +22,7 @@
         android:layout_margin="10dp"
         android:textColor="@android:color/black"
         android:hint="@string/user_password"
-        android:inputType="numberPassword" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/login"
