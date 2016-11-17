@@ -13,8 +13,8 @@ import cn.ac.ict.alpha.presenters.LoginPresenter;
 public class LoginActivity extends BaseActivity {
 
     public static final String TAG = "LoginActivity";
-    @BindView(R.id.user_name)
-    EditText mUserName;
+    @BindView(R.id.phone_number)
+    EditText mPhoneNumber;
     @BindView(R.id.password)
     EditText mPassword;
     @BindView(R.id.login)
@@ -43,21 +43,24 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.new_user:
 //                跳转到注册界面
-//                startActivity(RegisterActivity.class);
+                startActivity(RegisterActivity.class);
                 break;
         }
     }
 
+    private void startLogin() {
+        login();
+    }
 
     private void login() {
         hideKeyBoard();
-        String userName = mUserName.getText().toString().trim();
+        String phoneNumber = mPhoneNumber.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
-        mLoginPresenter.login(userName, password);
+        mLoginPresenter.login(phoneNumber, password);
     }
 
-    public void onUserNameError() {
-        mUserName.setError(getString(R.string.user_name_error));
+    public void onPhoneNumberError() {
+        mPhoneNumber.setError(getString(R.string.phone_number_error));
     }
 
     public void onPasswordError() {
@@ -80,30 +83,4 @@ public class LoginActivity extends BaseActivity {
         toast(getString(R.string.login_failed));
     }
 
-
-    private void startLogin() {
-//        如果之后需要请求权限，可以仿照下面的代码写在这里。
-//        if (hasWriteExternalStoragePermission()) {
-//            login();
-//        } else {
-//            applyPermission();
-//        }
-        login();
-    }
-
-    /**
-     * 申请权限回调
-     */
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case REQUEST_WRITE_EXTERNAL_STORAGE:
-//                if (grantResults[0] == PermissionChecker.PERMISSION_GRANTED) {
-//                    login();
-//                } else {
-//                    toast(getString(R.string.not_get_permission));
-//                }
-//                break;
-//        }
-//    }
 }

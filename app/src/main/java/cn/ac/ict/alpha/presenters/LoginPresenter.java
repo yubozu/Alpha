@@ -1,7 +1,12 @@
 package cn.ac.ict.alpha.presenters;
 
+import android.util.Log;
+
+import cn.ac.ict.alpha.Entities.StatusEntity;
 import cn.ac.ict.alpha.Utils.StringUtils;
 import cn.ac.ict.alpha.activities.LoginActivity;
+import cn.ac.ict.alpha.models.ApiClient;
+import rx.Subscriber;
 
 /**
  * Author: saukymo
@@ -11,50 +16,45 @@ import cn.ac.ict.alpha.activities.LoginActivity;
 public class LoginPresenter {
     public static final String TAG = "LoginPresenter";
 
-    public LoginActivity mLoginView;
+    private LoginActivity mLoginView;
 
     public LoginPresenter(LoginActivity loginView) {
         mLoginView = loginView;
     }
 
-    public void login(String userName, String pwd) {
-        if (StringUtils.checkUserName(userName)) {
-            if (StringUtils.checkPassword(pwd)) {
+    public void login(String phoneNumber, String password) {
+        if (StringUtils.checkPhoneNumber(phoneNumber)) {
+            if (StringUtils.checkPassword(password)) {
                 mLoginView.onStartLogin();
-                startLogin(userName, pwd);
+                startLogin(phoneNumber, password);
             } else {
                 mLoginView.onPasswordError();
             }
         } else {
-            mLoginView.onUserNameError();
+            mLoginView.onPhoneNumberError();
         }
     }
 
-    private void startLogin(String userName, String pwd) {
+    private void startLogin(String phoneNumber, String pwd) {
 //        调用model的登录模块检查用户名密码是否正确
-        mLoginView.onLoginSuccess();
+        Subscriber subscriber = new Subscriber<StatusEntity>() {
+            @Override
+            public void onCompleted() {
+                mLoginView.onLoginSuccess();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, e.toString());
+                mLoginView.onLoginFailed();
+            }
+
+            @Override
+            public void onNext(StatusEntity statusEntity) {
+                mLoginView.toast(statusEntity.getStatus());
+            }
+        };
+        ApiClient.getInstance().getStatus(subscriber);
     }
 
-//    private EMCallBackAdapter mEMCallBack = new EMCallBackAdapter() {
-//
-//        @Override
-//        public void onSuccess() {
-//            ThreadUtils.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mLoginView.onLoginSuccess();
-//                }
-//            });
-//        }
-//
-//        @Override
-//        public void onError(int i, String s) {
-//            ThreadUtils.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mLoginView.onLoginFailed();
-//                }
-//            });
-//        }
-//    };
 }
