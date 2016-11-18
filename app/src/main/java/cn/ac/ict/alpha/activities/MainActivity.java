@@ -109,18 +109,22 @@ public class MainActivity extends BaseActivity {
                 pickDate();
                 break;
             case R.id.bt_start_evaluate:
-                // TODO: 开始评估
                 if(spinnerGender.isClickable())
                 {
                     toast(getString(R.string.must_save_info));
                     return;
                 }
-                startActivity(MedicineActivity.class);
+                mMainPresenter.prepareEva();
+
                 break;
             case R.id.bt_logout:
                 // TODO: 用户登出
                 break;
         }
+    }
+    public void onPrepared()
+    {
+        startActivity(MedicineActivity.class,false);
     }
     private void pickDate()
     {
@@ -147,6 +151,7 @@ public class MainActivity extends BaseActivity {
         builder.setView(v);
         builder.show();
     }
+
 
 //    private void login() {
 //        hideKeyBoard();

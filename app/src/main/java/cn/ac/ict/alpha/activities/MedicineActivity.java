@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import cn.ac.ict.alpha.R;
+import cn.ac.ict.alpha.activities.count.CountMainActivity;
 import cn.ac.ict.alpha.presenters.MedicinePresenter;
 
 public class MedicineActivity extends BaseActivity {
@@ -63,8 +64,7 @@ public class MedicineActivity extends BaseActivity {
     {
         hideProgress();
         toast("Prepared");
-        //TODO: start the first test
-//        startActivity(MedicineActivity.this,);
+        startActivity(CountMainActivity.class,false);
     }
     @OnCheckedChanged(R.id.tg_medicine)
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

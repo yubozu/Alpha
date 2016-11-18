@@ -7,13 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="BtnStyle">
+    <style name="BtnStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:padding">20dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textColor">@color/freebie_1</item>
+        <item name="android:background">@color/freebie_4</item>
     </style>
     <style name="TitleTextStyle">
         <item name="android:layout_width">match_parent</item>
@@ -33,8 +34,43 @@
         <!-- 兼容API 7-->
         <item name="android:windowActionBar">false</item>
         <!-- Activity全屏 开始-->
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
     <!-- Activity无标题栏 结束-->
+    <style name = "module_main_page">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name = "android:layout_margin">10dp</item>
+        <item name = "android:layout_width">wrap_content</item>
+        <item name = "android:layout_height">wrap_content</item>
+        <item name = "android:textColor">@color/freebie_6</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:textSize">@dimen/material_component_text_module_tips_text_size</item>
+    </style>
+    <style name="PrimaryButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_marginBottom">@dimen/material_component_dialogs_padding_around_buttons</item>
+        <item name="android:textColor">@color/freebie_1</item>
+        <item name="android:background">@color/freebie_4</item>
+    </style>
+    <style name="ProgressBar">
+        <item name="progress_text_visibility">invisible</item>
+        <item name="progress_unreached_bar_height">5dp</item>
+        <item name="progress_reached_bar_height">5dp</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+    <style name = "module_images">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name = "android:layout_marginLeft">5dp</item>
+        <item name = "android:layout_marginRight">5dp</item>
+        <item name = "android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name = "android:layout_weight">0.1</item>
+    </style>
+    <style name = "module_tips">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name = "android:layout_margin">10dp</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:textColor">@color/freebie_6</item>
+        <item name="android:textSize">@dimen/material_component_lists_single_line_text_size</item>
+    </style>
 </resources>
