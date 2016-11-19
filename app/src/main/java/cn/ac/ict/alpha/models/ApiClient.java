@@ -1,6 +1,8 @@
 package cn.ac.ict.alpha.models;
 
+import cn.ac.ict.alpha.Entities.ResultEntity;
 import cn.ac.ict.alpha.Entities.StatusEntity;
+import cn.ac.ict.alpha.Entities.UserInfo;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -53,5 +55,20 @@ public class ApiClient {
                 .subscribe(subscriber);
     }
 
+    public void login(Subscriber<ResultEntity> subscriber, UserInfo userInfo) {
+        mApiService.login(userInfo)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void register(Subscriber<ResultEntity> subscriber, UserInfo userInfo) {
+        mApiService.login(userInfo)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 }

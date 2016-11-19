@@ -2,7 +2,8 @@ package cn.ac.ict.alpha.presenters;
 
 import android.util.Log;
 
-import cn.ac.ict.alpha.Entities.StatusEntity;
+import cn.ac.ict.alpha.Entities.ResultEntity;
+import cn.ac.ict.alpha.Entities.UserInfo;
 import cn.ac.ict.alpha.Utils.StringUtils;
 import cn.ac.ict.alpha.activities.LoginActivity;
 import cn.ac.ict.alpha.models.ApiClient;
@@ -26,7 +27,7 @@ public class LoginPresenter {
         if (StringUtils.checkPhoneNumber(phoneNumber)) {
             if (StringUtils.checkPassword(password)) {
                 mLoginView.onStartLogin();
-                startLogin(phoneNumber, password);
+                startLogin(new UserInfo(phoneNumber, password));
             } else {
                 mLoginView.onPasswordError();
             }
@@ -35,12 +36,10 @@ public class LoginPresenter {
         }
     }
 
-    private void startLogin(String phoneNumber, String pwd) {
-//        调用model的登录模块检查用户名密码是否正确
-        Subscriber subscriber = new Subscriber<StatusEntity>() {
+    private void startLogin(UserInfo userInfo) {
+        Subscriber<ResultEntity> subscriber = new Subscriber<ResultEntity>() {
             @Override
             public void onCompleted() {
-                mLoginView.onLoginSuccess();
             }
 
             @Override
@@ -50,11 +49,18 @@ public class LoginPresenter {
             }
 
             @Override
-            public void onNext(StatusEntity statusEntity) {
-                mLoginView.toast(statusEntity.getStatus());
+            public void onNext(ResultEntity resultEntity) {
+                String status = resultEntity.getStatus();
+                if (status.equals("OK")) {
+                    mLoginView.onLoginSuccess();
+                } else {
+                    mLoginView.toast(resultEntity.getError());
+                    mLoginView.onLoginFailed();
+                }
             }
         };
-        ApiClient.getInstance().getStatus(subscriber);
+
+        ApiClient.getInstance().login(subscriber, userInfo);
     }
 
 }
