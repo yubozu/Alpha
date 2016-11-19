@@ -1,5 +1,9 @@
 package cn.ac.ict.alpha.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import java.io.File;
 import java.util.HashMap;
 
 import cn.ac.ict.alpha.activities.MainActivity;
@@ -31,6 +35,29 @@ public class MainPresenter {
     public void saveInfo(int gender, String birthday) {
         //TODO: Save current info into SharePreference and upload to cloud
         mMainView.onSaveOK();
+    }
+
+    public void prepareEva() {
+        SharedPreferences sharedPreferences = mMainView.getSharedPreferences("Alpha", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong("startTime",System.currentTimeMillis());
+        editor.putString("memoryScore","-1");
+        editor.putString("standScore","-1");
+        editor.putString("faceScore","-1");
+        editor.putString("soundScore","-1");
+        editor.putString("tappingScore","-1");
+        editor.putString("strideScore","-1");
+        editor.putBoolean("takingMed",false);
+        editor.putInt("lastTaken",0);
+        editor.apply();
+        String dir = mMainView.getFilesDir().getAbsolutePath()+"/tempData";
+        File fdir = new File(dir);
+        if(fdir.exists())
+        {
+            fdir.delete();
+        }
+        fdir.mkdirs();
+        mMainView.onPrepared();
     }
 
 //    public void login(String userName, String pwd) {

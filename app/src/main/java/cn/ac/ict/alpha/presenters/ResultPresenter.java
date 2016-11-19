@@ -1,8 +1,13 @@
 package cn.ac.ict.alpha.presenters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.content.Context;
+import android.content.SharedPreferences;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import cn.ac.ict.alpha.Utils.BaseResult;
 import cn.ac.ict.alpha.activities.ResultActivity;
 
 /**
@@ -21,21 +26,22 @@ public class ResultPresenter {
 
     public void loadTestData() {
         //TODO: Load test data from shared preference
-        ArrayList<HashMap> list = new ArrayList<>();
-        HashMap<String,String> map = new HashMap<>();
-        map.put("test_name","认知游戏");
-        map.put("start_time","2016-11-16 14:50");
-        map.put("end_time","2016-11-16 15:50");
-        map.put("score","10");
-        list.add(map);
-        HashMap<String,String> map1 = new HashMap<>();
-        map1.put("test_name","行走平衡");
-        map1.put("start_time","2016-11-16 14:50");
-        map1.put("end_time","2016-11-16 15:50");
-        map1.put("score","10");
-        list.add(map1);
-        list.add(map1);list.add(map1);list.add(map1);
-        mResultView.onTestDataLoaded(list);
+        String[] scoreNames={"memoryScore","standScore","faceScore","soundScore","tappingScore","strideScore"};
+        SharedPreferences sharedPreferences = mResultView.getSharedPreferences("Alpha", Context.MODE_PRIVATE);
+        ArrayList<BaseResult> results = new ArrayList<>();
+        for(int i=0;i<scoreNames.length;i++)
+        {
+            float score = Float.parseFloat(sharedPreferences.getString(scoreNames[i],"-1"));
+            if(score==-1)
+                continue;
+            int type = i;
+            String resultPath = sharedPreferences.getString(scoreNames[i],null);
+            results.add(new BaseResult(resultPath,score,type));
+        }
+        long start = sharedPreferences.getLong("startTime",0l);
+        long end = sharedPreferences.getLong("endTime",0l);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        mResultView.onTestDataLoaded(results,sdf.format(new Date(start)),sdf.format(new Date(end)));
     }
 
 }
