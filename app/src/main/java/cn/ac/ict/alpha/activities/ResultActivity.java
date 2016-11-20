@@ -19,8 +19,12 @@ public class ResultActivity extends BaseActivity {
     public static final String TAG = "ResultActivity";
     @BindView(R.id.lv_test_results)
     ListView lvTestResults;
-    @BindView(R.id.bt_evaluate_self)
-    Button btEvaSelf;
+//    @BindView(R.id.bt_evaluate_self)
+//    Button btEvaSelf;
+    @BindView(R.id.bt_upload)
+    Button btUpload;
+    @BindView(R.id.bt_cancel)
+    Button btCancel;
     @BindView(R.id.tv_guide_info)
     TextView tvGuide;
     private ResultPresenter mResultPresenter;
@@ -40,14 +44,26 @@ public class ResultActivity extends BaseActivity {
     }
     public void onTestDataLoaded(ArrayList  list,String startTime,String endTime)
     {
-        ResultAdapter adapter = new ResultAdapter(ResultActivity.this,list);
+        ResultAdapter adapter = new ResultAdapter(ResultActivity.this, list);
         lvTestResults.setAdapter(adapter);
         tvGuide.setText(String.format(getString(R.string.guide_info),startTime,endTime,list.size()));
     }
-    @OnClick(R.id.bt_evaluate_self)
+//    @OnClick(R.id.bt_evaluate_self)
+//    public void onClick(View view) {
+//        // TODO: 18/11/2016
+//        startActivity(MainActivity.class);
+//    }
+
+    @OnClick({R.id.bt_upload, R.id.bt_cancel})
     public void onClick(View view) {
-        // TODO: 18/11/2016
-        startActivity(MainActivity.class);
+        switch (view.getId()) {
+            case R.id.bt_upload:
+                startUpload();
+                break;
+            case R.id.bt_cancel:
+                onBackPressed();
+                break;
+        }
     }
 
     @Override
@@ -80,5 +96,24 @@ public class ResultActivity extends BaseActivity {
         }
         super.onPause();
 
+    }
+
+    private void startUpload() {
+        mResultPresenter.upload();
+    }
+
+    public void onStartUpload() {
+        showProgress("正在上传");
+    }
+
+    public void onUploadSuccess() {
+        hideProgress();
+        toast("上传成功");
+        startActivity(MainActivity.class, true);
+    }
+
+    public void onUploadFailed() {
+        hideProgress();
+        toast("上传失败");
     }
 }

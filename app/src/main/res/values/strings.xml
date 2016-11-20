@@ -46,6 +46,7 @@
     <string name="saving_failed">保存失败</string>
     <string name="edit_user_info">个人信息</string>
     <string name="edit_user_password">修改密码</string>
+    <string name="upload">开始上传</string>
     <!--medicine-->
     <string name="medicine_info">用药情况</string>
     <string name="taken_medicine">正在服用治疗帕金森病药物：</string>

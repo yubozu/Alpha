@@ -2,6 +2,8 @@ package cn.ac.ict.alpha.models;
 
 import cn.ac.ict.alpha.Entities.AuthEntity;
 import cn.ac.ict.alpha.Entities.BaseEntity;
+import cn.ac.ict.alpha.Entities.ExamEntity;
+import cn.ac.ict.alpha.Entities.UploadResponseEntity;
 import cn.ac.ict.alpha.Entities.UserInfoEntity;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -82,6 +84,14 @@ public class ApiClient {
 
     public void getUserInfo(Subscriber<UserInfoEntity> subscriber, Integer userId) {
         mApiService.getUserInfo(userId)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void uploadExamFiles(Subscriber<UploadResponseEntity> subscriber, ExamEntity examEntity) {
+        mApiService.uploadExamFiles(examEntity, examEntity.getFile())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
