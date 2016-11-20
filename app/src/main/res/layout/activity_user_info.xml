@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0.1">
+    <TextView
+        style="@style/flat_text"
+        android:text="@string/phone_number" />
+
+    <EditText
+        android:id="@+id/phone_number"
+        style="@style/flat_text"
+        android:inputType="number"
+        android:includeFontPadding="true" />
+
+    <TextView
+        style="@style/flat_text"
+        android:text="@string/gender" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="@string/male" />
+
+        <com.cengalabs.flatui.views.FlatToggleButton
+            style="@style/flat_toggle"
+            android:id="@+id/gender"
+            flatui:fl_textColor="fl_main"
+            flatui:fl_theme="@array/grass"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/female"
+            android:textSize="18sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/flat_text"
+        android:text="@string/age" />
+
+    <EditText
+        android:id="@+id/age"
+        style="@style/flat_text"
+        android:inputType="number"
+        android:includeFontPadding="true" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        style="@style/BtnStyle"
+        android:text="@string/save" />
+
+    <Button
+        android:id="@+id/cancel"
+        style="@style/BtnStyle"
+        android:text="@string/cancel" />
+
+</LinearLayout>

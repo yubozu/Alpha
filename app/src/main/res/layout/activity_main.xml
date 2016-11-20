@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/freebie_9">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/freebie_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="PD助手"
+            android:textColor="@color/freebie_0"
+            android:textSize="@dimen/material_component_text_title_text_size" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0.05"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/logo" />
+
+    <!--Info-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+        android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin">
+
+            <Button
+                android:id="@+id/bt_start_evaluate"
+                style="@style/BtnStyle"
+                android:text="@string/start_evaluate" />
+            <Button
+                android:id="@+id/bt_edit_user_info"
+                style="@style/BtnStyle"
+                android:text="@string/edit_user_info" />
+            <Button
+                android:id="@+id/bt_edit_user_password"
+                style="@style/BtnStyle"
+                android:text="@string/edit_user_password" />
+            <Button
+                android:id="@+id/bt_logout"
+                style="@style/BtnStyle"
+                android:text="@string/logout" />
+        </LinearLayout>
+</LinearLayout>

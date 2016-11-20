@@ -2,10 +2,12 @@
     <string name="app_name">Alpha</string>
     <string name="user_name">用户名</string>
     <string name="user_password">密码</string>
+    <string name="phone_number">手机号码</string>
     <string name="login">登录</string>
     <string name="new_user">新用户</string>
-    <string name="user_name_error">用户名不合法，3到20位，首字母必须是字母</string>
-    <string name="user_password_error">密码不合法，3到20位数字</string>
+    <string name="phone_number_error">手机号码不正确，请输入正确的手机号码</string>
+    <string name="user_name_error">用户名不合法，3到20位，首字符必须是字母</string>
+    <string name="user_password_error">密码不合法，4到15位数字、字母或者下划线，首字符必须是字母。</string>
     <string name="register">注册</string>
     <string name="user_password_confirm">确认密码</string>
     <string name="user_password_confirm_error">密码不一致</string>
@@ -16,4 +18,161 @@
     <string name="logining">登录中...</string>
     <string name="login_success">登录成功</string>
     <string name="login_failed">登录失败</string>
+    <!--Main Activity-->
+    <string name="info_title">您的个人信息</string>
+    <string name="start_evaluate">开始评估</string>
+    <string name="gender">性别</string>
+    <string name="info_birthday">出生日期</string>
+    <string name="click_to_pick_date">点击选择日期</string>
+    <string name="change_info">修改个人信息</string>
+    <string name="save_info">保存个人信息</string>
+    <string name="image_description">logo</string>
+    <string name="logout">登出</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="must_input_gender">您的性别有助于提高评估准确率，请进行输入</string>
+    <string name="must_input_birthday">您的出生日期有助于提高评估准确率，请进行输入</string>
+    <string name="must_save_info">请首先在个人信息中补充您的基本信息，这些信息将会提高检测的准确率</string>
+    <string-array name="gender">
+        <item>女</item>
+        <item>男</item>
+    </string-array>
+    <string name="age">年龄</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="save">保存</string>
+    <string name="saving">保存中</string>
+    <string name="saving_success">保存成功</string>
+    <string name="saving_failed">保存失败</string>
+    <string name="edit_user_info">个人信息</string>
+    <string name="edit_user_password">修改密码</string>
+    <!--medicine-->
+    <string name="medicine_info">用药情况</string>
+    <string name="taken_medicine">正在服用治疗帕金森病药物：</string>
+    <string name="last_taken_time">距离上一次服药时间：</string>
+    <string name="tip">注意事项！\n本评估共由6项测试组成，共约需要20分钟。为保证评估准确性，请尽量按照相应要求完成全部测试。\n请您在评估过程中保证自身安全，如有必要，需有人陪同完成此次评估！</string>
+    <string name="start">开始</string>
+    <string name="must_input_time">请选择上次服药时间</string>
+    <string name="must_read_tip">请仔细阅读注意事项</string>
+    <string-array name="time">
+        <item>未选择</item>
+        <item>不到15分钟</item>
+        <item>大约15分钟</item>
+        <item>大约30分钟</item>
+        <item>大约45分钟</item>
+        <item>大约1小时</item>
+        <item>超过1小时</item>
+    </string-array>
+
+    <!--result-->
+    <string name="result_show">测试结果</string>
+    <string name="guide_info">恭喜你，本次从%1$s开始，到%2$s结束，共完成了%3$d项测试。各项测试评估结果如下。</string>
+    <string name="evaluate_self">请对本次评估进行自我评价</string>
+    <string name="test_name">测试名称：</string>
+    <string name="start_time">开始时间：</string>
+    <string name="end_time">结束时间：</string>
+    <string name="score">得分：</string>
+
+    <!--memory-->
+    <string name="count_tips">\n请您记住接下来出现的数字，选择图片版或语音版进行记忆测试！</string>
+    <string name="eye_count_tip">本测试将在屏幕上连续显示6个数字，请进行记忆并在显示完成后输入答案，共有5次输入机会。</string>
+    <string name="count_hint">请输入看到的数字</string>
+    <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
+    <string name="count_right_answer">正确的答案是%1$s。</string>
+    <string name="count_wrong_answer">输入有误!\n\n一共尝试了%1$d次。</string>
+    <string name="count_listen_carefully_begin">请仔细听接下来朗读的数字，叮声后开始</string>
+    <string name="count_listen_carefully_finish">请仔细听\n记住其中的数字</string>
+    <string name="count_sim_delete">删除</string>
+    <string name="count_sim_clear">清空</string>
+    <string name="count_sim_input">请输入数字</string>
+    <string name= "input_hint">提示</string>
+    <string name= "input_full_hint">有效数字是6位数，您的输入已满。\n请点击确定验证答案或删除重新输入。</string>
+    <string name="countt_try_input">您的输入为：\n</string>
+    <string name="countt_input_rightanswer">\n您的输入正确！\n\n</string>
+    <string name="countt_input_wronganswer">\n您的输入错误！\n\n</string>
+    <string name="countt_right_answer">正确答案是：</string>
+    <string name="count_test_version_sound">语音版</string>
+    <string name="count_test_version_picture">图片版</string>
+    <string name="btn_confirm">确认</string>
+    <string name="eye_count">视觉数字记忆</string>
+    <string name="back_to_medicine">用药情况</string>
+
+
+    <!--stand-->
+    <string name="stand_image_description">示例图</string>
+    <string name="stand_tips">点击开始测试后，手持设备，双手交叉抱肩，倒计时5秒钟后，测试正式开始，请保持上述姿势，单腿站立10秒钟。左脚和右脚分别完成。</string>
+    <string name="stand_left">左脚</string>
+    <string name="stand_right">右脚</string>
+    <string name="stand_chooseFoot">请选择抬起脚:</string>
+    <string name="model_stand">单脚站立平衡</string>
+
+    <!--face-->
+    <string name="module_face">面部表情</string>
+    <string name="face_tips">本测试将录制您的面部表情，请将手机上举，录制过程中保持摄像头与您的双眼在同一水平，并保证面部完整的出现在画面中。请仔细聆听语音，按照提示完成相应动作。</string>
+    <string name="face_task_1">请闭眼</string>
+    <string name="face_task_2">请放松，直视前方</string>
+    <string name="face_task_3">请微笑并露出牙齿</string>
+    <string name="face_finish_error">视频拍摄失败，错误:</string>
+
+    <!--sound-->
+    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时，嘴尽量靠近话筒，距离在5cm以内，如图所示，尽量声音洪亮，准备好后请点击开始录音。</string>
+    <string name="sound_complete">完成</string>
+    <string name="sound_recoding">正在录音...</string>
+    <array name="SoundQueston">
+        <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
+        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。</item>
+    </array>
+    <string name="btn_start_record">开始录音</string>
+    <string name="module_sound">语言能力</string>
+    <string name="btn_next_btn">下一题</string>
+
+    <!--tapping-->
+    <string name="tapper_index_finger">食指</string>
+    <string name="tapper_middle_finger">中指</string>
+    <string name="tapper_tips">请用食指和中指以最快的速度，最大幅度交替点击按钮。点击开始测试，倒计时5秒后，测试正式开始。</string>
+    <string name="tapper_count_down">测试倒计时: %d</string>
+    <string name = "tapper_main_hand">请选择测试手:</string>
+    <string name = "tapper_main_lefthand">左手</string>
+    <string name="tapper_main_righthand">右手</string>
+    <string name="tapper_image_description">示例图</string>
+    <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
+    <string name="module_tapping">手指点击游戏</string>
+    <string name="left_hand">左手</string>
+    <string name="right_hand">右手</string>
+    <string name="tapping_choose_hand">请选择操作手</string>
+
+    <!--test_main-->
+    <string name="prev_test">前一项</string>
+    <string name="start_eva">开始测试</string>
+    <string name="skip">跳过，直接进行下一项</string>
+    <string name="confirm_skip">确定跳过吗？</string>
+    <string name="skip_dialog_content">该测试能够反映您的相关能力，请尽量完成。</string>
+    <string name="skip_negative">好的</string>
+    <string name="skip_positive">无法完成，跳过</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+<!--stride-->
+    <string name="stride_image_description">示例图</string>
+    <string name="stride_main_tip">请将设备放置于胸前,完成起立、行走、转身、行走、坐下,点击开始测试,5秒钟后测试开始。</string>
+    <string name="stride_trail_numbers">测试来回次数</string>
+    <string name="stride_distance">每次测试行走距离</string>
+    <string name="stride_prepare">请做好准备</string>
+    <string name="stride_testing">正在测试</string>
+    <string name="stride_next_turn">即将检测</string>
+    <string name="stride_btn_text">完成</string>
+    <string name="stride_tug_btn">Tug测试</string>
+    <string name="stride_walking_btn">行走1分钟</string>
+    <string name="stride_walking_tip">请将设备置于胸前，持续行走1分钟，点击开始按钮后5秒钟测试开始。</string>
+    <string name="stride_walking_carryon">若无法坚持行走，请点击结束</string>
+    <string name="module_stride">步态平衡</string>
+    <string name="btn_begin">开始</string>
+
 </resources>

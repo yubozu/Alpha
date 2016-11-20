@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/freebie_9"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/freebie_2">
+
+        <TextView
+            android:id="@+id/tv_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:text="@string/prev_test"
+            android:textColor="@color/freebie_0"
+            android:textSize="@dimen/material_component_text_module_tips_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="@string/model_stand"
+            android:textColor="@color/freebie_0"
+            android:textSize="@dimen/material_component_text_title_text_size" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+        android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+        android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dip"
+                android:text="@string/stand_chooseFoot"
+                android:textSize="16sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/stand_left"
+                    android:textSize="16sp"
+                    flatui:fl_theme="@array/freebie_theme" />
+
+                <com.cengalabs.flatui.views.FlatToggleButton
+                    android:id="@+id/toggle_foot"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:checked="true"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn=""
+                    flatui:fl_cornerRadius="18dp"
+                    flatui:fl_space="14dp"
+                    flatui:fl_theme="@array/freebie_toggle" />
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/stand_right"
+                    android:textSize="16sp"
+                    flatui:fl_theme="@array/freebie_theme" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/module_main_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/stand_tips" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/stand_image_description"
+            android:src="@drawable/iv_stand_example" />
+
+        <Button
+            android:id="@+id/bt_start"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_eva" />
+
+        <Button
+            android:id="@+id/bt_skip"
+            style="@style/PrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skip" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.05"
+        android:text="2/6"
+        android:textColor="@color/freebie_6"
+        android:textSize="20sp" />
+</LinearLayout>
+

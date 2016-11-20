@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/freebie_9">
+
+    <!--title-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/freebie_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="@string/medicine_info"
+            android:textColor="@color/freebie_0"
+            android:textSize="@dimen/material_component_text_title_text_size" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+        android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ContentTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/taken_medicine" />
+
+            <com.cengalabs.flatui.views.FlatToggleButton
+                android:id="@+id/tg_medicine"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:checked="true"
+                android:text=""
+                android:textOff=""
+                android:textOn=""
+                flatui:fl_cornerRadius="18dp"
+                android:layout_gravity="center"
+                flatui:fl_space="14dp"
+                flatui:fl_theme="@array/freebie_toggle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_medicine_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ContentTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/last_taken_time" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_medicine_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                app:ms_background_color="@color/freebie_0"
+                android:textColor="@color/freebie_6"
+               />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tip"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_med_start"
+            style="@style/BtnStyle"
+            android:layout_marginBottom="20dp"
+            android:text="@string/start" />
+    </LinearLayout>
+</LinearLayout>
