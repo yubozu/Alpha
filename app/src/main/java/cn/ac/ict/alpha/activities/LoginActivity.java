@@ -33,6 +33,7 @@ public class LoginActivity extends BaseActivity {
     protected void init() {
         super.init();
         mLoginPresenter = new LoginPresenter(this);
+        mLoginPresenter.autoLogin();
     }
 
     @OnClick({R.id.login, R.id.new_user})
@@ -43,7 +44,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.new_user:
 //                跳转到注册界面
-                startActivity(RegisterActivity.class);
+                startActivity(RegisterActivity.class, false);
                 break;
         }
     }
@@ -75,7 +76,7 @@ public class LoginActivity extends BaseActivity {
         hideProgress();
         toast(getString(R.string.login_success));
 //        跳转到程序主界面
-//        startActivity(MainActivity.class);
+        startActivity(MainActivity.class);
     }
 
     public void onLoginFailed() {
@@ -83,4 +84,8 @@ public class LoginActivity extends BaseActivity {
         toast(getString(R.string.login_failed));
     }
 
+    public void setAuthInfo(String phoneNumber, String password) {
+        mPhoneNumber.setText(phoneNumber);
+        mPassword.setText(password);
+    }
 }

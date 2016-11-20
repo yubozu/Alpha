@@ -21,7 +21,7 @@
     <!--Main Activity-->
     <string name="info_title">您的个人信息</string>
     <string name="start_evaluate">开始评估</string>
-    <string name="info_gender">性别</string>
+    <string name="gender">性别</string>
     <string name="info_birthday">出生日期</string>
     <string name="click_to_pick_date">点击选择日期</string>
     <string name="change_info">修改个人信息</string>
@@ -32,12 +32,20 @@
     <string name="confirm">确定</string>
     <string name="must_input_gender">您的性别有助于提高评估准确率，请进行输入</string>
     <string name="must_input_birthday">您的出生日期有助于提高评估准确率，请进行输入</string>
-    <string name="must_save_info">您的性别和出生日期有助于提高评估准确率，请进行保存后开始评估</string>
+    <string name="must_save_info">请首先在个人信息中补充您的基本信息，这些信息将会提高检测的准确率</string>
     <string-array name="gender">
         <item>女</item>
         <item>男</item>
     </string-array>
-
+    <string name="age">年龄</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="save">保存</string>
+    <string name="saving">保存中</string>
+    <string name="saving_success">保存成功</string>
+    <string name="saving_failed">保存失败</string>
+    <string name="edit_user_info">个人信息</string>
+    <string name="edit_user_password">修改密码</string>
     <!--medicine-->
     <string name="medicine_info">用药情况</string>
     <string name="taken_medicine">正在服用治疗帕金森病药物：</string>

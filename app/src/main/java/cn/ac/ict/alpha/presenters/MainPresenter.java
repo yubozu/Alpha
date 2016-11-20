@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.io.File;
-import java.util.HashMap;
 
 import cn.ac.ict.alpha.activities.MainActivity;
 
@@ -22,22 +21,16 @@ public class MainPresenter {
         mMainView = mainView;
     }
 
-    public HashMap<String,Object> getUserInfo() {
-        // TODO: A test version, should get the info from SharePreference
-        String gender= "gender";
-        String birthday = "birthday";
-        HashMap<String,Object> userInfo = new HashMap<>();
-        userInfo.put(gender,1);
-        userInfo.put(birthday,"1991-02-02");
-        return userInfo;
+    public void startExam() {
+        SharedPreferences sharedPreferences = mMainView.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        Integer age = sharedPreferences.getInt("age", 0);
+        if (age > 0) {
+            prepareEva();
+        }
+        mMainView.onStartExam(age == 0);
     }
 
-    public void saveInfo(int gender, String birthday) {
-        //TODO: Save current info into SharePreference and upload to cloud
-        mMainView.onSaveOK();
-    }
-
-    public void prepareEva() {
+    private void prepareEva() {
         SharedPreferences sharedPreferences = mMainView.getSharedPreferences("Alpha", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("startTime",System.currentTimeMillis());
@@ -57,47 +50,14 @@ public class MainPresenter {
             fdir.delete();
         }
         fdir.mkdirs();
-        mMainView.onPrepared();
     }
 
-//    public void login(String userName, String pwd) {
-//        if (StringUtils.checkUserName(userName)) {
-//            if (StringUtils.checkPassword(pwd)) {
-//                mLoginView.onStartLogin();
-//                startLogin(userName, pwd);
-//            } else {
-//                mLoginView.onPasswordError();
-//            }
-//        } else {
-//            mLoginView.onUserNameError();
-//        }
-//    }
-//
-//    private void startLogin(String userName, String pwd) {
-////        调用model的登录模块检查用户名密码是否正确
-//        mLoginView.onLoginSuccess();
-//    }
-
-//    private EMCallBackAdapter mEMCallBack = new EMCallBackAdapter() {
-//
-//        @Override
-//        public void onSuccess() {
-//            ThreadUtils.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mLoginView.onLoginSuccess();
-//                }
-//            });
-//        }
-//
-//        @Override
-//        public void onError(int i, String s) {
-//            ThreadUtils.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mLoginView.onLoginFailed();
-//                }
-//            });
-//        }
-//    };
+    public void logout() {
+        SharedPreferences.Editor editor = mMainView.getSharedPreferences("UserInfo", Context.MODE_PRIVATE).edit();
+        editor.remove("password");
+        editor.remove("user_id");
+        editor.remove("age");
+        editor.remove("gender");
+        editor.apply();
+    }
 }

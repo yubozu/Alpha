@@ -86,7 +86,8 @@ public class RegisterActivity extends BaseActivity {
         hideProgress();
         toast(getString(R.string.register_success));
 //        跳转到程序主界面
-        startActivity(LoginActivity.class);
+//        startActivity(LoginActivity.class);
+        finish();
     }
 
     public void onRegisterFailed() {

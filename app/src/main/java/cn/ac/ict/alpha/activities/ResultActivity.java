@@ -35,7 +35,7 @@ public class ResultActivity extends BaseActivity {
     protected void init() {
         super.init();
         mResultPresenter = new ResultPresenter(this);
-        //TODO: get data form m ResultPresentor
+        //TODO: get data form m ResultPresenter
         mResultPresenter.loadTestData();
     }
     public void onTestDataLoaded(ArrayList  list,String startTime,String endTime)

@@ -38,8 +38,8 @@ public class ResultPresenter {
             String resultPath = sharedPreferences.getString(scoreNames[i],null);
             results.add(new BaseResult(resultPath,score,type));
         }
-        long start = sharedPreferences.getLong("startTime",0l);
-        long end = sharedPreferences.getLong("endTime",0l);
+        long start = sharedPreferences.getLong("startTime", 0l);
+        long end = sharedPreferences.getLong("endTime", 0l);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         mResultView.onTestDataLoaded(results,sdf.format(new Date(start)),sdf.format(new Date(end)));
     }

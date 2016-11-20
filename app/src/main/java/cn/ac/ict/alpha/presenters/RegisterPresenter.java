@@ -2,8 +2,8 @@ package cn.ac.ict.alpha.presenters;
 
 import android.util.Log;
 
-import cn.ac.ict.alpha.Entities.ResultEntity;
-import cn.ac.ict.alpha.Entities.UserInfo;
+import cn.ac.ict.alpha.Entities.AuthEntity;
+import cn.ac.ict.alpha.Entities.UserInfoEntity;
 import cn.ac.ict.alpha.Utils.StringUtils;
 import cn.ac.ict.alpha.activities.RegisterActivity;
 import cn.ac.ict.alpha.models.ApiClient;
@@ -40,12 +40,12 @@ public class RegisterPresenter {
         }
 
         mRegisterView.onStartRegister();
-        startRegister(new UserInfo(phoneNumber, password));
+        startRegister(new UserInfoEntity(phoneNumber, password));
     }
 
-    private void startRegister(UserInfo userInfo) {
+    private void startRegister(UserInfoEntity userInfo) {
 //        调用model的注册模块新增用户
-        Subscriber<ResultEntity> subscriber = new Subscriber<ResultEntity>() {
+        Subscriber<AuthEntity> subscriber = new Subscriber<AuthEntity>() {
             @Override
             public void onCompleted() {
             }
@@ -57,12 +57,12 @@ public class RegisterPresenter {
             }
 
             @Override
-            public void onNext(ResultEntity resultEntity) {
-                String status = resultEntity.getStatus();
+            public void onNext(AuthEntity authEntity) {
+                String status = authEntity.getStatus();
                 if (status.equals("OK")) {
                     mRegisterView.onRegisterSuccess();
                 } else {
-                    mRegisterView.toast(resultEntity.getError());
+                    mRegisterView.toast(authEntity.getError());
                     mRegisterView.onRegisterFailed();
                 }
             }
