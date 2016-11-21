@@ -241,7 +241,6 @@ public class CountSimKeyboardActivity extends Activity {
     }
 
     protected void saveAndContinue() {
-        double score = 0;
         String content = randomStr;
         if(isRight){
             content+=";1";
@@ -256,11 +255,7 @@ public class CountSimKeyboardActivity extends Activity {
         for(String x: result){
             content+=";"+x;
         }
-        if(isRight)
-        {
-            score = (5.0-(result.size()-1))/5.0;
-        }
-        saveToStorage(content,score);
+        saveToStorage(content);
         sweetAlertDialog = new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE);
         sweetAlertDialog.setTitleText("测试完成！")
                 .setContentText("点击确定进行下一项测试")
@@ -276,7 +271,7 @@ public class CountSimKeyboardActivity extends Activity {
 
     }
 
-    public void saveToStorage(String content,double score){
+    public void saveToStorage(String content){
         SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
 //        String uuid = sharedPreferences.getString("selectedUser", "None");
 //        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
@@ -302,7 +297,7 @@ public class CountSimKeyboardActivity extends Activity {
 //        history.id = historyProvider.InsertHistory(history);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("memoryFilePath", filePath);
-        editor.putString("memoryScore",String.format("%1.1f",score));
+        editor.putString("memoryScore",String.format("%1.1f",CountEvaluation.CountEvaluation(isRight,result)));
         editor.apply();
 //        Log.d("CountSaveToStorage", String.valueOf(history.id));
 //        EventBus.getDefault().post(new NewHistoryEvent());

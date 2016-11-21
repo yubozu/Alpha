@@ -47,7 +47,7 @@ public class StrideMainActivity extends BaseActivity {
                 startActivity(TapperMainActivity.class);
                 break;
             case R.id.bt_start:
-                SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
+                final SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
                 double score = Double.parseDouble(sharedPreferences.getString("strideScore", "-1"));
                 if (score >= 0) {
                     sweetAlertDialog = new SweetAlertDialog(StrideMainActivity.this, SweetAlertDialog.WARNING_TYPE)
@@ -66,6 +66,9 @@ public class StrideMainActivity extends BaseActivity {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     //TODO: complete the eva
                                     startActivity(new Intent(StrideMainActivity.this, ResultActivity.class));
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putLong("endTime",System.currentTimeMillis());
+                                    editor.apply();
                                     finish();
                                 }
                             });
@@ -75,6 +78,7 @@ public class StrideMainActivity extends BaseActivity {
                 }
                 break;
             case R.id.bt_skip:
+
                 sweetAlertDialog = new SweetAlertDialog(StrideMainActivity.this, SweetAlertDialog.NORMAL_TYPE)
                         .setTitleText(getString(R.string.confirm_skip))
                         .setContentText(getString(R.string.skip_dialog_content))
@@ -89,12 +93,16 @@ public class StrideMainActivity extends BaseActivity {
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                //TODO:complete the eva
+                                SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
                                 startActivity(new Intent(StrideMainActivity.this, ResultActivity.class));
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putLong("endTime",System.currentTimeMillis());
+                                editor.apply();
                                 finish();
                             }
                         });
                 sweetAlertDialog.show();
+                sweetAlertDialog.setCancelable(false);
                 break;
         }
     }

@@ -99,17 +99,20 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 5:
-                        timer.cancel();
+                        if(timer!=null)
+                            timer.cancel();
                         mp2.start();
                         tvHint.setText(getString(R.string.face_task_2));
                         break;
                     case 10:
-                        timer.cancel();
+                        if(timer!=null)
+                            timer.cancel();
                         mp3.start();
                         tvHint.setText(getString(R.string.face_task_3));
                         break;
                     case 15:
-                        timer.cancel();
+                        if(timer!=null)
+                            timer.cancel();
                         iv_bt.performClick();
                     default:
                         break;

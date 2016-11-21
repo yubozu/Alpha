@@ -91,6 +91,7 @@ public class ResultPresenter {
         Integer userId = getUserId();
         // TODO: 如果跳过测试，文件名为空。
         File examFile = new File(getFilePath(examType));
+        Log.d(TAG, "loadExamEntity: "+getFilePath(examType));
         RequestBody file = RequestBody.create(MediaType.parse(getMediaType(examType)), examFile);
         String score = getScore(examType);
         Integer medicine = getMedicine();

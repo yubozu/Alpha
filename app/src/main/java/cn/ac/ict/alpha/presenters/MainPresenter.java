@@ -3,8 +3,7 @@ package cn.ac.ict.alpha.presenters;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.io.File;
-
+import cn.ac.ict.alpha.Utils.FileUtils;
 import cn.ac.ict.alpha.activities.MainActivity;
 
 /**
@@ -43,13 +42,7 @@ public class MainPresenter {
         editor.putBoolean("takingMed",false);
         editor.putInt("lastTaken",0);
         editor.apply();
-        String dir = mMainView.getFilesDir().getAbsolutePath()+"/tempData";
-        File fdir = new File(dir);
-        if(fdir.exists())
-        {
-            fdir.delete();
-        }
-        fdir.mkdirs();
+        FileUtils.initFileDir(mMainView);
     }
 
     public void logout() {
