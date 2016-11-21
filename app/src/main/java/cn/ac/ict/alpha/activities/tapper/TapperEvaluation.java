@@ -2,16 +2,18 @@ package cn.ac.ict.alpha.activities.tapper;
 
 import java.util.ArrayList;
 
+import cn.ac.ict.alpha.Utils.MathUtils;
+
 /**
  * Author: saukymo
  * Date: 9/28/16
  */
 
 public class TapperEvaluation {
-    public static float evaluation(ArrayList<Boolean> indicatior, ArrayList<Long> timestamps)
+    public static double evaluation(ArrayList<Boolean> indicatior, ArrayList<Long> timestamps)
     {
         // TODO:
-        return 0.0f;
+        return indicatior.size()/100.0;
     }
     public static double eva_order(ArrayList<Boolean> indicatior)
     {
@@ -30,8 +32,15 @@ public class TapperEvaluation {
         }
         return (double)oppo/(double)(same+oppo);
     }
-    public static double eva_harmonic(ArrayList<Boolean> indicatior, ArrayList<Long> timestamps)
+    public static double a_harmonic(ArrayList<Long> timestamps)
     {
+        ArrayList<Long> times = new ArrayList<>();
+        for(int i=1;i<times.size();i++)
+        {
+            times.add(timestamps.get(i)-times.get(i-1));
+        }
+        double mean  = MathUtils.mean_long(times);
+        double std = MathUtils.std_long(times);
         return 0.0d;
     }
 

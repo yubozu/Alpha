@@ -49,7 +49,7 @@ public class ResultPresenter {
         }
         long start = sharedPreferences.getLong("startTime", 0l);
         long end = sharedPreferences.getLong("endTime", 0l);
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
         mResultView.onTestDataLoaded(results,sdf.format(new Date(start)),sdf.format(new Date(end)));
     }
 

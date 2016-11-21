@@ -21,6 +21,24 @@ public class MathUtils {
         means[2] = z_sum/data.size();
         return means;
     }
+    public static double mean_long(ArrayList<Long> data) {
+
+        long sum = 0;
+        for (int i = 0; i < data.size(); i++) {
+           sum+=data.get(i);
+        }
+        return (double)sum/(double)data.size();
+    }
+    public static double std_long(ArrayList<Long> data)
+    {
+        double mean  = mean_long(data);
+        double delta = 0d;
+        for(int i=0;i<data.size();i++)
+        {
+            delta+=Math.abs(data.get(i)-mean);
+        }
+        return Math.sqrt(delta);
+    }
     public static float[] std(ArrayList<FloatVector> data)
     {
         float[][] xyz = getXYZlist(data);

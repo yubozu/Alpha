@@ -77,7 +77,13 @@ public class ResultAdapter extends BaseAdapter {
                 tv_name.setText("步态平衡");
                 break;
         }
-        tv_score.setText(String.valueOf(list.get(i).getScore()));
+        if (list.get(i).getScore()==-1)
+        {
+            tv_score.setText("等待医生评估");
+        }
+        else {
+            tv_score.setText(String.valueOf(list.get(i).getScore()));
+        }
         return view;
     }
 }

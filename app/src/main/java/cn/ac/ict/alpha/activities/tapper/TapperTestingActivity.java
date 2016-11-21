@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.FileUtils;
-import cn.ac.ict.alpha.activities.face.FaceMainActivity;
 import cn.ac.ict.alpha.activities.stride.StrideMainActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -90,14 +89,13 @@ public class TapperTestingActivity extends Activity {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    startActivity(new Intent(TapperTestingActivity.this, FaceMainActivity.class));
+                                    startActivity(new Intent(TapperTestingActivity.this, StrideMainActivity.class));
                                     finish();
                                 }
                             });
+                    sweetAlertDialog.setCancelable(false);
                     sweetAlertDialog.show();
-                    //TODO: next test
-                    startActivity(new Intent(TapperTestingActivity.this, StrideMainActivity.class));
-                    finish();
+
                   //  startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 }
                 return String.valueOf(timeRemainingInMillis/1000+1);
