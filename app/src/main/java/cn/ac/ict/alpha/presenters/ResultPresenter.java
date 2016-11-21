@@ -15,6 +15,7 @@ import cn.ac.ict.alpha.Utils.BaseResult;
 import cn.ac.ict.alpha.activities.ResultActivity;
 import cn.ac.ict.alpha.models.ApiClient;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import rx.Subscriber;
 
@@ -90,9 +91,15 @@ public class ResultPresenter {
     private ExamEntity loadExamEntity(String examType) {
         Integer userId = getUserId();
         // TODO: 如果跳过测试，文件名为空。
-        File examFile = new File(getFilePath(examType));
-        Log.d(TAG, "loadExamEntity: "+getFilePath(examType));
-        RequestBody file = RequestBody.create(MediaType.parse(getMediaType(examType)), examFile);
+
+        MultipartBody.Part file = null;
+        if (!getFilePath(examType).equals("")) {
+            File examFile = new File(getFilePath(examType));
+            RequestBody body = RequestBody.create(MediaType.parse(getMediaType(examType)), examFile);
+            file = MultipartBody.Part.createFormData("file", examFile.getName(), body);
+        }
+        Log.d(TAG, "loadExamEntity: " + getFilePath(examType));
+
         String score = getScore(examType);
         Integer medicine = getMedicine();
         return new ExamEntity(score, examType, file, userId, medicine);
@@ -127,6 +134,7 @@ public class ResultPresenter {
         if (result) {
             taskSuccess += 1;
         }
+        Log.d(TAG, "success: " + taskSuccess);
         if (taskSuccess.equals(taskCount)) {
                 mResultView.onUploadSuccess();
         }

@@ -5,7 +5,7 @@ import cn.ac.ict.alpha.Entities.BaseEntity;
 import cn.ac.ict.alpha.Entities.ExamEntity;
 import cn.ac.ict.alpha.Entities.UploadResponseEntity;
 import cn.ac.ict.alpha.Entities.UserInfoEntity;
-import okhttp3.RequestBody;
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -39,5 +39,5 @@ public interface ApiService {
     @Multipart
     @POST("exam")
     Observable<UploadResponseEntity>
-    uploadExamFiles(@Part("data") ExamEntity examEntity, @Part("file") RequestBody file);
+    uploadExamFiles(@Part("data") ExamEntity examEntity, @Part MultipartBody.Part file);
 }

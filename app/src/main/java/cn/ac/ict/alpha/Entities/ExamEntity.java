@@ -1,6 +1,6 @@
 package cn.ac.ict.alpha.Entities;
 
-import okhttp3.RequestBody;
+import okhttp3.MultipartBody;
 
 /**
  * Author: saukymo
@@ -10,13 +10,13 @@ import okhttp3.RequestBody;
 public class ExamEntity extends BaseEntity{
     private Integer id;
     private Integer userId;
-    private RequestBody file;
+    private MultipartBody.Part file;
     private String result;
     private String createdTime;
     private String examType;
     private Integer medicine;
 
-    public ExamEntity(String result, String examType, RequestBody file, Integer userId, Integer medicine) {
+    public ExamEntity(String result, String examType, MultipartBody.Part file, Integer userId, Integer medicine) {
         this.result = result;
         this.userId = userId;
         this.file = file;
@@ -31,7 +31,7 @@ public class ExamEntity extends BaseEntity{
         this.medicine = medicine;
     }
 
-    public RequestBody getFile() {
+    public MultipartBody.Part getFile() {
         return file;
     }
 
@@ -75,7 +75,7 @@ public class ExamEntity extends BaseEntity{
         this.userId = userId;
     }
 
-    public void setFile(RequestBody file) {
+    public void setFile(MultipartBody.Part file) {
         this.file = file;
     }
 }
