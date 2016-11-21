@@ -8,6 +8,7 @@ import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import cn.ac.ict.alpha.Entities.ExamEntity;
 import cn.ac.ict.alpha.Entities.UploadResponseEntity;
@@ -33,6 +34,7 @@ public class ResultPresenter {
     public ResultPresenter(ResultActivity resultActivity) {
         mResultView = resultActivity;
     }
+    public final static ArrayList<String> ModuleList= new ArrayList<>(Arrays.asList("memory", "stand", "face", "sound", "tapping", "stride"));
 
     public void loadTestData() {
         //TODO: Load test data from shared preference
@@ -54,7 +56,11 @@ public class ResultPresenter {
         mResultView.onTestDataLoaded(results,sdf.format(new Date(start)),sdf.format(new Date(end)));
     }
 
-    public void upload() {
+    public void upload(final Integer task) {
+        if (task.equals(taskCount)) {
+            mResultView.onUploadSuccess();
+            return;
+        }
         Subscriber<UploadResponseEntity> subscriber = new Subscriber<UploadResponseEntity>() {
             @Override
             public void onCompleted() {
@@ -69,23 +75,15 @@ public class ResultPresenter {
             @Override
             public void onNext(UploadResponseEntity uploadResponseEntity) {
                 String status = uploadResponseEntity.getStatus();
-                if (status.equals("OK")) {
-                    onResponse(true);
-                } else {
+                if (! status.equals("OK")) {
                     mResultView.toast(uploadResponseEntity.getError());
                     mResultView.onUploadFailed();
                 }
+                upload(task + 1);
             }
         };
 
-        taskSuccess = 0;
-        mResultView.onStartUpload();
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("memory"));
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("tapping"));
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("stride"));
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("stand"));
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("face"));
-        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity("sound"));
+        ApiClient.getInstance().uploadExamFiles(subscriber, loadExamEntity(ModuleList.get(task)));
     }
 
     private ExamEntity loadExamEntity(String examType) {

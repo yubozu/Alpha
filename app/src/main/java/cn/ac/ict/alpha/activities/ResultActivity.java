@@ -99,11 +99,8 @@ public class ResultActivity extends BaseActivity {
     }
 
     private void startUpload() {
-        mResultPresenter.upload();
-    }
-
-    public void onStartUpload() {
         showProgress("正在上传");
+        mResultPresenter.upload(0);
     }
 
     public void onUploadSuccess() {
@@ -115,5 +112,8 @@ public class ResultActivity extends BaseActivity {
     public void onUploadFailed() {
         hideProgress();
         toast("上传失败");
+    }
+
+    public void onCompleted() {
     }
 }
