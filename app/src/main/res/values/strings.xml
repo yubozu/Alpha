@@ -176,4 +176,11 @@
     <string name="module_stride">步态平衡</string>
     <string name="btn_begin">开始</string>
 
+    <!-- permission -->
+    <string name="permission_tips">请点击下面的按钮并允许权限</string>
+    <string name="permission_granted">已经允许的权限有:</string>
+    <string name="permission_denied">权限被拒绝</string>
+    <string name="permission_remained">还需要允许%1$d项权限</string>
+    <string name="btn_continue">继续</string>
+
 </resources>

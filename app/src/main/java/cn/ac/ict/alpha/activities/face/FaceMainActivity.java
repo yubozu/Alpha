@@ -16,7 +16,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FaceMainActivity extends BaseActivity {
     private MediaPlayer mp;
-    SweetAlertDialog sweetAlertDialog = null ;
+    SweetAlertDialog sweetAlertDialog = null;
+
     @Override
     public int getLayoutRes() {
         return R.layout.activity_face_main;
@@ -28,48 +29,45 @@ public class FaceMainActivity extends BaseActivity {
         initWidget();
     }
 
-    private void initWidget()
-    {
-        mp = MediaPlayer.create(getApplicationContext(),R.raw.face_guide);
+    private void initWidget() {
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.face_guide);
         mp.start();
 
     }
 
     @Override
     protected void onPause() {
-        if(mp!=null)
-        {
+        if (mp != null) {
             mp.stop();
             mp.release();
-            mp=null;
+            mp = null;
 
         }
-        if(sweetAlertDialog!=null&&sweetAlertDialog.isShowing())
-        {
+        if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
             sweetAlertDialog.dismiss();
         }
         super.onPause();
     }
-    @OnClick({R.id.tv_prev,R.id.bt_start,R.id.bt_skip})
-    public void onClick(View view)
-    {
-        switch (view.getId()){
+
+    @OnClick({R.id.tv_prev, R.id.bt_start, R.id.bt_skip})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_prev:
                 startActivity(StandMainActivity.class);
                 break;
             case R.id.bt_start:
+
                 SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
-                double score  = Double.parseDouble(sharedPreferences.getString("faceScore","-1"));
-                if(score>=0)
-                {
-                     sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.WARNING_TYPE)
+                double score = Double.parseDouble(sharedPreferences.getString("faceScore", "-1"));
+                if (score >= 0) {
+                    sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("确定吗？")
                             .setContentText("本次评估已经进行此测试，是否重新测试？")
                             .setConfirmText("是的，重新测试")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
-                                    startActivity(VideoCaptureActivity.class,false);
+                                    startActivity(VideoCaptureActivity.class, false);
                                 }
                             })
                             .setCancelText("不，进行下一项")
@@ -81,11 +79,13 @@ public class FaceMainActivity extends BaseActivity {
                                 }
                             });
                     sweetAlertDialog.show();
-                }else{
-                    startActivity(VideoCaptureActivity.class,false);}
+                } else {
+                    startActivity(VideoCaptureActivity.class, false);
+                }
+
                 break;
             case R.id.bt_skip:
-                 sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.NORMAL_TYPE)
+                sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.NORMAL_TYPE)
                         .setTitleText(getString(R.string.confirm_skip))
                         .setContentText(getString(R.string.skip_dialog_content))
                         .setConfirmText(getString(R.string.skip_negative))
@@ -110,7 +110,7 @@ public class FaceMainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-         sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.WARNING_TYPE)
+        sweetAlertDialog = new SweetAlertDialog(FaceMainActivity.this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("退出")
                 .setContentText("本次评估尚未完成，是否退出？")
                 .setConfirmText("退出")
