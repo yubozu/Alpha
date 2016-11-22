@@ -29,7 +29,6 @@
         <activity android:name=".activities.count.CountMainActivity" />
         <activity android:name=".activities.count.CountGameActivity" />
         <activity android:name=".activities.count.CountSimKeyboardActivity" />
-        <activity android:name=".activities.count.CountSoundActivity" />
         <activity android:name=".activities.stand.StandMainActivity" />
         <activity android:name=".activities.stand.StandTestingActivity" />
         <activity android:name=".activities.face.FaceMainActivity" />
