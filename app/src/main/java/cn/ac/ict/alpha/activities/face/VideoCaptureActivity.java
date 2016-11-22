@@ -47,14 +47,13 @@ import cn.ac.ict.alpha.activities.face.configuration.CaptureConfiguration;
 import cn.ac.ict.alpha.activities.face.recorder.AlreadyUsedException;
 import cn.ac.ict.alpha.activities.face.recorder.VideoRecorder;
 import cn.ac.ict.alpha.activities.face.recorder.VideoRecorderInterface;
-import cn.ac.ict.alpha.activities.face.view.RecordingButtonInterface;
 import cn.ac.ict.alpha.activities.face.view.VideoCaptureView;
 import cn.ac.ict.alpha.activities.sound.SoundMainActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class VideoCaptureActivity extends Activity implements RecordingButtonInterface, VideoRecorderInterface {
-
+public class VideoCaptureActivity extends Activity implements VideoRecorderInterface {
+    private String TAG = "VideoCaptureActivity";
     public static final int RESULT_ERROR = 753245;
 
     public static final String EXTRA_OUTPUT_FILENAME = "com.jmolsmobile.extraoutputfilename";
@@ -80,18 +79,15 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     TimerTask tt;
     int i = 0;
     ImageView iv_bt;
+    boolean flag = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CLog.toggleLogging(this);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_face_videocapture);
-
         initializeCaptureConfiguration(savedInstanceState);
-
         mVideoCaptureView = (VideoCaptureView) findViewById(R.id.videocapture_videocaptureview_vcv);
         iv_bt = (ImageView) mVideoCaptureView.findViewById(R.id.videocapture_recordbtn_iv);
         mHandler = new Handler() {
@@ -99,21 +95,22 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 5:
-                        if(timer!=null)
+                        if (timer != null)
                             timer.cancel();
                         mp2.start();
                         tvHint.setText(getString(R.string.face_task_2));
                         break;
                     case 10:
-                        if(timer!=null)
+                        if (timer != null)
                             timer.cancel();
                         mp3.start();
                         tvHint.setText(getString(R.string.face_task_3));
                         break;
                     case 15:
-                        if(timer!=null)
+                        if (timer != null)
                             timer.cancel();
-                        iv_bt.performClick();
+                        flag = true;
+                        onRecordingSuccess();
                     default:
                         break;
                 }
@@ -132,7 +129,14 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             @Override
             public void onCompletion(MediaPlayer mp) {
                 try {
-                    iv_bt.performClick();
+                    //iv_bt.performClick();
+                    try {
+                        mVideoRecorder.toggleRecording();
+                    } catch (AlreadyUsedException e) {
+                        Log.d(CLog.ACTIVITY, "Cannot toggle recording after cleaning up all resources");
+                        finishWithError();
+                    }
+//                    onRecordingStarted();
                     timer = new Timer(true);
                     tt = new TimerTask() {
                         @Override
@@ -187,7 +191,8 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         iv_bt.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                mp1.start();
+                if (mp1 != null)
+                    mp1.start();
             }
         }, 1000);
 
@@ -202,8 +207,8 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     private void initializeRecordingUI() {
         Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        mVideoRecorder = new VideoRecorder(this, mCaptureConfiguration, mVideoFile, new CameraWrapper(new NativeCamera(), display.getRotation()),mVideoCaptureView.getPreviewSurfaceHolder());
-        mVideoCaptureView.setRecordingButtonInterface(this);
+        mVideoRecorder = new VideoRecorder(this, mCaptureConfiguration, mVideoFile, new CameraWrapper(new NativeCamera(), display.getRotation()), mVideoCaptureView.getPreviewSurfaceHolder());
+        // mVideoCaptureView.setRecordingButtonInterface(this);
         boolean showTimer = this.getIntent().getBooleanExtra(EXTRA_SHOW_TIMER, true);
         mVideoCaptureView.showTimer(showTimer);
 //        if (mVideoRecorded) {
@@ -215,68 +220,70 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(sweetAlertDialog!=null&&sweetAlertDialog.isShowing())
-        {
+    private void finishWithError() {
+        if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
             sweetAlertDialog.dismiss();
         }
         if (mVideoRecorder != null) {
             mVideoRecorder.stopRecording(null);
         }
-        if(mp1!=null)
-        {
+        if (tt != null) {
+            tt.cancel();
+            tt = null;
+        }
+        if (mp1 != null) {
             mp1.stop();
+            mp1.release();
             mp1 = null;
         }
-        if(timer!=null)
-        {
+        if (timer != null) {
             timer.cancel();
             timer = null;
         }
-        if(mp2!=null)
-        {
+        if (mp2 != null) {
             mp2.stop();
             mp2 = null;
         }
-        if(mp3!=null)
-        {
+        if (mp3 != null) {
             mp3.stop();
             mp3 = null;
         }
-        if(timer!=null)
-        {
+        if (timer != null) {
             timer.cancel();
             timer = null;
         }
         releaseAllResources();
         //iv_bt.performClick();
         finishCancelled();
-
     }
 
     @Override
-    public void onRecordButtonClicked() {
-        Log.d("ddd","recordbtn");
-        try {
-            mVideoRecorder.toggleRecording();
-        } catch (AlreadyUsedException e) {
-            CLog.d(CLog.ACTIVITY, "Cannot toggle recording after cleaning up all resources");
-        }
+    protected void onPause() {
+        finishWithError();
+        super.onPause();
     }
 
-    @Override
-    public void onAcceptButtonClicked() {
-        Log.d("ddd", "onAcceptButtonClicked");
-        finishCompleted();
-    }
+//    @Override
+//    public void onRecordButtonClicked() {
+//        try {
+//            mVideoRecorder.toggleRecording();
+//        } catch (AlreadyUsedException e) {
+//            Log.d(CLog.ACTIVITY, "Cannot toggle recording after cleaning up all resources");
+//            finishWithError();
+//        }
+//    }
+//
+//    @Override
+//    public void onAcceptButtonClicked() {
+//        Log.d("ddd", "onAcceptButtonClicked");
+//        finishCompleted();
+//    }
 
-    @Override
-    public void onDeclineButtonClicked() {
-        Log.d("ddd", "onDeclineButtonClicked: ");
-        finishCancelled();
-    }
+//    @Override
+//    public void onDeclineButtonClicked() {
+//        Log.d("ddd", "onDeclineButtonClicked: ");
+//        finishCancelled();
+//    }
 
     @Override
     public void onRecordingStarted() {
@@ -289,13 +296,16 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
 
-        mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
+//        mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
         releaseAllResources();
     }
 
     @Override
     public void onRecordingSuccess() {
         mVideoRecorded = true;
+        mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
+        finishCompleted();
+        releaseAllResources();
     }
 
     @Override
@@ -304,27 +314,28 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     }
 
     public void finishCompleted() {
-        saveToStorage();
-       // Intent intent = new Intent(VideoCaptureActivity.this, ModuleHelper.getActivityAfterExam());
-      //  startActivity(intent);
-        sweetAlertDialog = new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE);
-        sweetAlertDialog.setTitleText("测试完成！")
-                .setContentText("点击确定进行下一项测试")
-                .setConfirmText("确定")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        startActivity(new Intent(VideoCaptureActivity.this, SoundMainActivity.class));
-                        finish();
-                    }
-                });
-        sweetAlertDialog.show();
+        if (flag) {
+            saveToStorage();
+            // Intent intent = new Intent(VideoCaptureActivity.this, ModuleHelper.getActivityAfterExam());
+            //  startActivity(intent);
+            sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+            sweetAlertDialog.setTitleText("测试完成！")
+                    .setContentText("点击确定进行下一项测试")
+                    .setConfirmText("确定")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            startActivity(new Intent(VideoCaptureActivity.this, SoundMainActivity.class));
+                            finish();
+                        }
+                    });
+            sweetAlertDialog.show();
+        }
     }
 
     private void finishCancelled() {
         //this.setResult(RESULT_CANCELED);
-        if(mVideoFile!=null)
-        {
+        if (mVideoFile != null) {
             mVideoFile.delete();
         }
         finish();
@@ -332,8 +343,8 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     }
 
     private void finishError(final String message) {
-        Toast.makeText(getApplicationContext(), getString(R.string.face_finish_error) + message, Toast.LENGTH_LONG).show();
-
+        //  Toast.makeText(getApplicationContext(), getString(R.string.face_finish_error) + message, Toast.LENGTH_LONG).show();
+        finishWithError();
         final Intent result = new Intent();
         result.putExtra(EXTRA_ERROR_MESSAGE, message);
         this.setResult(RESULT_ERROR, result);
@@ -389,13 +400,20 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     }
 
     public void saveToStorage() {
+
+        Log.d(TAG, "saveToStorage: ");
         SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
         String filePath = FileUtils.getFilePath(this, "face");
         mVideoFile.saveTo(filePath);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("faceFilePath", filePath);
-        editor.putString("faceScore","0");
+        editor.putString("faceScore", "0");
         editor.apply();
+
     }
 
+    @Override
+    public void onBackPressed() {
+        finishCancelled();
+    }
 }

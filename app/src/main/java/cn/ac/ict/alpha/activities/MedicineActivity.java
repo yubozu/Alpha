@@ -63,7 +63,6 @@ public class MedicineActivity extends BaseActivity {
     public void onPrepared()
     {
         hideProgress();
-        toast("Prepared");
         startActivity(CountMainActivity.class,false);
     }
     @OnCheckedChanged(R.id.tg_medicine)

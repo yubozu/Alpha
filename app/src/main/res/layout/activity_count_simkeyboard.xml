@@ -4,6 +4,7 @@
     android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingTop="@dimen/material_component_cards_primary_title_top_padding"
+    android:keepScreenOn="true"
     android:background="@color/freebie_9"
     android:gravity="center"
     android:layout_width="match_parent"
@@ -32,13 +33,6 @@
         android:layout_weight="0.2"
         android:gravity="center_vertical"
         android:hint="@string/count_sim_input"/>
-
-    <Button
-        android:id = "@+id/count_voice"
-        android:background="@drawable/count_keymusic_open"
-        android:layout_gravity="top"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
 
     </LinearLayout>
 

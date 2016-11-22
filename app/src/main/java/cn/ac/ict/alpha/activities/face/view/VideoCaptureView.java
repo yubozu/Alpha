@@ -21,11 +21,9 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -34,7 +32,7 @@ import android.widget.TextView;
 import cn.ac.ict.alpha.R;
 
 
-public class VideoCaptureView extends FrameLayout implements OnClickListener {
+public class VideoCaptureView extends FrameLayout {
 
     private ImageView mDeclineBtnIv;
     private ImageView mAcceptBtnIv;
@@ -45,7 +43,7 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
     private Handler customHandler = new Handler();
     private long startTime = 0L;
     Context context;
-    private RecordingButtonInterface mRecordingInterface;
+  //  private RecordingButtonInterface mRecordingInterface;
     private boolean mShowTimer;
 
 	public VideoCaptureView(Context context) {
@@ -73,9 +71,9 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
 		mAcceptBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_acceptbtn_iv);
 		mDeclineBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_declinebtn_iv);
 
-		mRecordBtnIv.setOnClickListener(this);
-		mAcceptBtnIv.setOnClickListener(this);
-		mDeclineBtnIv.setOnClickListener(this);
+//		mRecordBtnIv.setOnClickListener(this);
+//		mAcceptBtnIv.setOnClickListener(this);
+//		mDeclineBtnIv.setOnClickListener(this);
 
         mThumbnailIv = (ImageView) videoCapture.findViewById(R.id.videocapture_preview_iv);
         mSurfaceView = (SurfaceView) videoCapture.findViewById(R.id.videocapture_preview_sv);
@@ -83,9 +81,9 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
         mTimerTv = (TextView) videoCapture.findViewById(R.id.videocapture_timer_tv);
     }
 
-	public void setRecordingButtonInterface(RecordingButtonInterface mBtnInterface) {
-		this.mRecordingInterface = mBtnInterface;
-	}
+//	public void setRecordingButtonInterface(RecordingButtonInterface mBtnInterface) {
+//		this.mRecordingInterface = mBtnInterface;
+//	}
 
 	public SurfaceHolder getPreviewSurfaceHolder() {
 		return mSurfaceView.getHolder();
@@ -154,23 +152,23 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
 //            }
 //        });
 //        builder.show();
-        mAcceptBtnIv.performClick();
+      //  mAcceptBtnIv.performClick();
     }
 
-	@Override
-	public void onClick(View v) {
-		if (mRecordingInterface == null)
-            return;
-		if (v.getId() == mRecordBtnIv.getId()) {
-			mRecordingInterface.onRecordButtonClicked();
-		} else if (v.getId() == mAcceptBtnIv.getId()) {
-            Log.d("ddd","ddd");
-            mRecordingInterface.onAcceptButtonClicked();
-		} else if (v.getId() == mDeclineBtnIv.getId()) {
-			mRecordingInterface.onDeclineButtonClicked();
-		}
-
-	}
+//	@Override
+//	public void onClick(View v) {
+//		if (mRecordingInterface == null)
+//            return;
+//		if (v.getId() == mRecordBtnIv.getId()) {
+//			mRecordingInterface.onRecordButtonClicked();
+//		} else if (v.getId() == mAcceptBtnIv.getId()) {
+//            Log.d("ddd","ddd");
+//            mRecordingInterface.onAcceptButtonClicked();
+//		} else if (v.getId() == mDeclineBtnIv.getId()) {
+//			mRecordingInterface.onDeclineButtonClicked();
+//		}
+//
+//	}
 
     public void showTimer(boolean showTimer) {
         this.mShowTimer = showTimer;

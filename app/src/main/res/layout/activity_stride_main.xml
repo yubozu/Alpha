@@ -43,7 +43,7 @@
         <TextView
             style="@style/module_main_page"
             android:layout_weight="0.1"
-            android:text="@string/stride_main_tip"
+            android:text="@string/stride_walking_tip"
             android:textColor="@color/freebie_6" />
 
         <ImageView

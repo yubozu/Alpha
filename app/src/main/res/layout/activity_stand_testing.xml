@@ -4,6 +4,7 @@
     android:id="@+id/activity_stand_testing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:background="@color/freebie_9"
     android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"

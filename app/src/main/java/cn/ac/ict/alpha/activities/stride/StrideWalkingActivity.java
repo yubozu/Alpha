@@ -2,6 +2,7 @@ package cn.ac.ict.alpha.activities.stride;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -27,6 +28,8 @@ import java.util.Calendar;
 import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.FileUtils;
 import cn.ac.ict.alpha.Utils.FloatVector;
+import cn.ac.ict.alpha.activities.ResultActivity;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class StrideWalkingActivity extends Activity {
@@ -42,6 +45,7 @@ public class StrideWalkingActivity extends Activity {
     boolean start = false;
     Button goBtn = null;
     TextView tv = null;
+    SweetAlertDialog sweetAlertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,12 +136,18 @@ public class StrideWalkingActivity extends Activity {
         accEventListener = new AccEventListener();
         gyroEventListener = new GyroEventListener();
         sm = (SensorManager) StrideWalkingActivity.this.getSystemService(Context.SENSOR_SERVICE);
-        sm.registerListener(accEventListener,
-                sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_GAME);
-        sm.registerListener(gyroEventListener,
-                sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE),
-                SensorManager.SENSOR_DELAY_GAME);
+        Sensor acc =  sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if(acc!=null) {
+            sm.registerListener(accEventListener,
+                    acc,
+                    SensorManager.SENSOR_DELAY_GAME);
+        }
+        Sensor gyro =  sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if(gyro!=null) {
+            sm.registerListener(gyroEventListener,
+                    gyro,
+                    SensorManager.SENSOR_DELAY_GAME);
+        }
 
     }
 
@@ -156,8 +166,22 @@ public class StrideWalkingActivity extends Activity {
     private void executeFinish() {
         saveToStorage();
         //TODO:
-        //startActivity(new Intent(StrideWalkingActivity.this, ModuleHelper.getActivityAfterExam()));
-        //finish();
+        sweetAlertDialog = new SweetAlertDialog(StrideWalkingActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+        sweetAlertDialog.setTitleText("测试完成！")
+                .setContentText("点击完成测试")
+                .setConfirmText("确定")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        startActivity(new Intent(StrideWalkingActivity.this, ResultActivity.class));
+                        SharedPreferences.Editor editor = getSharedPreferences("Alpha", MODE_PRIVATE).edit();
+                        editor.putLong("endTime", System.currentTimeMillis());
+                        editor.apply();
+                        finish();
+                    }
+                });
+        sweetAlertDialog.setCancelable(false);
+        sweetAlertDialog.show();
 
     }
 
@@ -218,7 +242,7 @@ public class StrideWalkingActivity extends Activity {
     public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
 
-        String filePath = FileUtils.getFilePath(this, "walk");
+        String filePath = FileUtils.getFilePath(this, "stride");
         // Example: How to write data to file.
         File file = new File(filePath);
         try {
@@ -243,13 +267,19 @@ public class StrideWalkingActivity extends Activity {
         }
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("walkFilePath", filePath);
-        editor.putString("walkScore",String.format("%1.1f",getScore()));
+        editor.putString("strideFilePath", filePath);
+        editor.putString("strideScore",String.format("%1.1f",getScore()));
         editor.apply();
     }
 
     private float getScore() {
         //TODO:
         return 0.0f;
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(StrideWalkingActivity.this,StrideMainActivity.class));
+        finish();
     }
 }

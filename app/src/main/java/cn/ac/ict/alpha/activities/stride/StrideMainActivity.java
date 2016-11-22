@@ -29,7 +29,7 @@ public class StrideMainActivity extends BaseActivity {
     }
 
     private void startAudioWidget() {
-        mp = MediaPlayer.create(StrideMainActivity.this, R.raw.stride_guide);
+        mp = MediaPlayer.create(StrideMainActivity.this, R.raw.stride);
         mp.start();
     }
 
@@ -57,7 +57,7 @@ public class StrideMainActivity extends BaseActivity {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
-                                    startActivity(GoActivity.class);
+                                    startActivity(StrideWalkingActivity.class);
                                 }
                             })
                             .setCancelText("完成评估")
@@ -74,7 +74,7 @@ public class StrideMainActivity extends BaseActivity {
                             });
                     sweetAlertDialog.show();
                 } else {
-                    startActivity(GoActivity.class);
+                    startActivity(StrideWalkingActivity.class);
                 }
                 break;
             case R.id.bt_skip:

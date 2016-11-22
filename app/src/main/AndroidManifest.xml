@@ -13,39 +13,107 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:launchMode="singleTask"
-        android:screenOrientation="portrait"
         tools:replace="android:icon">
-        <activity
-            android:name=".activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!-- Module: Count -->
+        <activity android:name=".activities.count.CountMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.count.CountGameActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.count.CountSimKeyboardActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stand.StandMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stand.StandTestingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.face.FaceMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.face.VideoCaptureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.sound.SoundMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.tapper.TapperTestingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.tapper.TapperMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stride.GoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stride.StrideMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stride.StrideItemActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.stride.StrideWalkingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.RegisterActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.MedicineActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.ResultActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.UserInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.PasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activities.PermissionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Module: Count -->
-        <activity android:name=".activities.count.CountMainActivity" />
-        <activity android:name=".activities.count.CountGameActivity" />
-        <activity android:name=".activities.count.CountSimKeyboardActivity" />
-        <activity android:name=".activities.count.CountSoundActivity" />
-        <activity android:name=".activities.stand.StandMainActivity" />
-        <activity android:name=".activities.stand.StandTestingActivity" />
-        <activity android:name=".activities.face.FaceMainActivity" />
-        <activity android:name=".activities.face.VideoCaptureActivity" />
-        <activity android:name=".activities.sound.SoundMainActivity" />
-        <activity android:name=".activities.tapper.TapperTestingActivity" />
-        <activity android:name=".activities.tapper.TapperMainActivity" />
-        <activity android:name=".activities.stride.GoActivity" />
-        <activity android:name=".activities.stride.StrideMainActivity" />
-        <activity android:name=".activities.stride.StrideItemActivity" />
-        <activity android:name=".activities.stride.StrideWalkingActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.MedicineActivity" />
-        <activity android:name=".activities.ResultActivity" />
-        <activity android:name=".activities.UserInfoActivity" />
-        <activity android:name=".activities.PasswordActivity" />
     </application>
 </manifest>
