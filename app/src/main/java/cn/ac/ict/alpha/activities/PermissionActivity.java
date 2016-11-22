@@ -18,10 +18,10 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.ac.ict.alpha.Entities.PermissionEntity;
 import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.PermissionAdapter;
 import cn.ac.ict.alpha.Utils.ToastManager;
-import cn.ac.ict.alpha.models.Permission;
 
 
 /**
@@ -47,8 +47,8 @@ public class PermissionActivity extends BaseActivity {
     PermissionAdapter mPermissionAdapter;
     PermissionAdapter mPermissionGrantedAdapter;
 
-    private ArrayList<Permission> mPermissionSet = new ArrayList<>();
-    private ArrayList<Permission> mPermissionGrantedSet = new ArrayList<>();
+    private ArrayList<PermissionEntity> mPermissionEntitySet = new ArrayList<>();
+    private ArrayList<PermissionEntity> mPermissionEntityGrantedSet = new ArrayList<>();
 
     @Override
     protected void init() {
@@ -58,7 +58,7 @@ public class PermissionActivity extends BaseActivity {
         PermissionCheckStatus();
         //如果程序开始运行时,所有的权限都已经开通了的话,直接跳过这个界面;
         if (mPermissionAdapter.getCount() == 0) {
-            Log.d("Permission", "Skip permission");
+            Log.d("PermissionEntity", "Skip permission");
             startOurApp();
         }
     }
@@ -70,25 +70,28 @@ public class PermissionActivity extends BaseActivity {
 
 
     public void GeneratePermissionSet() {
-        ArrayList<Permission> permissions = new ArrayList<>();
-        permissions.add(new Permission(Manifest.permission.CAMERA));
-        permissions.add(new Permission(Manifest.permission.VIBRATE));
-        permissions.add(new Permission(Manifest.permission.INTERNET));
-        permissions.add(new Permission(Manifest.permission.RECORD_AUDIO));
+        ArrayList<PermissionEntity> permissionEntities = new ArrayList<>();
+        permissionEntities.add(new PermissionEntity(Manifest.permission.CAMERA));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.VIBRATE));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.INTERNET));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.RECORD_AUDIO));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.ACCESS_NETWORK_STATE));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.ACCESS_WIFI_STATE));
+        permissionEntities.add(new PermissionEntity(Manifest.permission.READ_PHONE_STATE));
 
-        for (Permission permission : permissions) {
-            permission.permissionStatus = getPackageManager().checkPermission(permission.permissionName, getPackageName()) == PackageManager.PERMISSION_GRANTED;
-            if (permission.permissionStatus) {
-                mPermissionGrantedSet.add(permission);
+        for (PermissionEntity permissionEntity : permissionEntities) {
+            permissionEntity.permissionStatus = getPackageManager().checkPermission(permissionEntity.permissionName, getPackageName()) == PackageManager.PERMISSION_GRANTED;
+            if (permissionEntity.permissionStatus) {
+                mPermissionEntityGrantedSet.add(permissionEntity);
             } else {
-                mPermissionSet.add(permission);
+                mPermissionEntitySet.add(permissionEntity);
             }
         }
     }
 
     public void InitialPermissionCheckList() {
-        mPermissionAdapter = new PermissionAdapter(PermissionActivity.this, mPermissionSet);
-        mPermissionGrantedAdapter = new PermissionAdapter(PermissionActivity.this, mPermissionGrantedSet);
+        mPermissionAdapter = new PermissionAdapter(PermissionActivity.this, mPermissionEntitySet);
+        mPermissionGrantedAdapter = new PermissionAdapter(PermissionActivity.this, mPermissionEntityGrantedSet);
 
         lvPermission.setAdapter(mPermissionAdapter);
         lvPermissionGranted.setAdapter(mPermissionGrantedAdapter);
@@ -105,12 +108,13 @@ public class PermissionActivity extends BaseActivity {
 
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            toastManager.show("Permission Granted");
-            Permission permission = mPermissionAdapter.getItem(requestCode);
-            permission.permissionStatus = true;
+//           toastManager.show("PermissionEntity Granted");
+            Log.d(TAG, "Granted");
+            PermissionEntity permissionEntity = mPermissionAdapter.getItem(requestCode);
+            permissionEntity.permissionStatus = true;
 
             mPermissionAdapter.deleteItem(requestCode);
-            mPermissionGrantedAdapter.addItem(permission);
+            mPermissionGrantedAdapter.addItem(permissionEntity);
 
         } else {
             toastManager.show(getResources().getString(R.string.permission_denied));

@@ -5,6 +5,10 @@
     <string name="phone_number">手机号码</string>
     <string name="login">登录</string>
     <string name="new_user">新用户</string>
+
+    <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
+    <string name="welcome_name">中科 宣武\n v1.2</string>
+
     <string name="phone_number_error">手机号码不正确，请输入正确的手机号码</string>
     <string name="user_name_error">用户名不合法，3到20位，首字符必须是字母</string>
     <string name="user_password_error">密码不合法，4到15位数字、字母或者下划线，首字符必须是字母。</string>
@@ -176,7 +180,7 @@
     <string name="module_stride">步态测试</string>
     <string name="btn_begin">开始</string>
 
-    <!-- permission -->
+    <!-- permissionEntity -->
     <string name="permission_tips">请点击下面的按钮并允许权限</string>
     <string name="permission_granted">已经允许的权限有:</string>
     <string name="permission_denied">权限被拒绝</string>

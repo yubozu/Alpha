@@ -30,7 +30,6 @@ public class ResultPresenter {
 
     public ResultActivity mResultView;
     private Integer taskCount = 6;
-    private Integer taskSuccess;
     public ResultPresenter(ResultActivity resultActivity) {
         mResultView = resultActivity;
     }
@@ -46,9 +45,9 @@ public class ResultPresenter {
             float score = Float.parseFloat(sharedPreferences.getString(scoreNames[i],"-1"));
             if(score==-1)
                 continue;
-            int type = i;
+//            int type = i;
             String resultPath = sharedPreferences.getString(scoreNames[i],null);
-            results.add(new BaseResult(resultPath,score,type));
+            results.add(new BaseResult(resultPath,score,i));
         }
         long start = sharedPreferences.getLong("startTime", 0l);
         long end = sharedPreferences.getLong("endTime", 0l);
@@ -88,7 +87,6 @@ public class ResultPresenter {
 
     private ExamEntity loadExamEntity(String examType) {
         Integer userId = getUserId();
-        // TODO: 如果跳过测试，文件名为空。
 
         MultipartBody.Part file = null;
         if (!getFilePath(examType).equals("")) {
@@ -126,16 +124,6 @@ public class ResultPresenter {
     private String getFilePath(String examType) {
         SharedPreferences sharedPreferences = mResultView.getSharedPreferences("Alpha", Context.MODE_PRIVATE);
         return sharedPreferences.getString(examType + "FilePath", "");
-    }
-
-    private void onResponse(Boolean result) {
-        if (result) {
-            taskSuccess += 1;
-        }
-        Log.d(TAG, "success: " + taskSuccess);
-        if (taskSuccess.equals(taskCount)) {
-                mResultView.onUploadSuccess();
-        }
     }
 
     private Integer getUserId(){

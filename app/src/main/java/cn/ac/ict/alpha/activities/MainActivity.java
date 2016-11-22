@@ -3,6 +3,8 @@ package cn.ac.ict.alpha.activities;
 import android.view.View;
 import android.widget.Button;
 
+import com.umeng.analytics.MobclickAgent;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.ac.ict.alpha.R;
@@ -29,6 +31,9 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         super.init();
         mMainPresenter = new MainPresenter(this);
+        MobclickAgent.UMAnalyticsConfig config = new MobclickAgent.UMAnalyticsConfig(this, "58345f2cb27b0a0a83000dd8", "airdoc");
+        MobclickAgent. startWithConfigure(config);
+        MobclickAgent.onProfileSignIn(String.valueOf(mMainPresenter.getUserId()));
     }
 
     @OnClick({R.id.bt_start_evaluate, R.id.bt_edit_user_info, R.id.bt_edit_user_password, R.id.bt_logout})
@@ -57,4 +62,14 @@ public class MainActivity extends BaseActivity {
             startActivity(MedicineActivity.class, false);
         }
     }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 }

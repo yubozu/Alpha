@@ -56,4 +56,9 @@ public class MainPresenter {
         editor.remove("gender");
         editor.apply();
     }
+
+    public Integer getUserId(){
+        SharedPreferences sharedPreferences = mMainView.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("user_id", -1);
+    }
 }

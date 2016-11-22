@@ -13,8 +13,8 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.ac.ict.alpha.Entities.PermissionEntity;
 import cn.ac.ict.alpha.R;
-import cn.ac.ict.alpha.models.Permission;
 
 /**
  * Author: saukymo
@@ -27,11 +27,11 @@ public class PermissionAdapter extends BaseAdapter {
     ToastManager toastManager;
     Context mContext;
     LayoutInflater layoutInflater;
-    private List<Permission> mPermissionSet;
-    public PermissionAdapter(Context context, List<Permission> mPermissionSet)
+    private List<PermissionEntity> mPermissionEntitySet;
+    public PermissionAdapter(Context context, List<PermissionEntity> mPermissionEntitySet)
     {
         this.mContext = context;
-        this.mPermissionSet = mPermissionSet;
+        this.mPermissionEntitySet = mPermissionEntitySet;
         this.layoutInflater = LayoutInflater.from(context);
     }
     @Override
@@ -43,14 +43,14 @@ public class PermissionAdapter extends BaseAdapter {
 
         Button btnPermissionName = (Button)view.findViewById(R.id.btn_permission_name);
 
-        Permission permission = getItem(position);
-        btnPermissionName.setText(permission.permissionName);
-        if (!permission.permissionStatus) {
+        PermissionEntity permissionEntity = getItem(position);
+        btnPermissionName.setText(permissionEntity.permissionName);
+        if (!permissionEntity.permissionStatus) {
             btnPermissionName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("CheckedChanged", String.valueOf(mPermissionSet.size()) + "," + String.valueOf(position));
-                    ActivityCompat.requestPermissions((Activity) mContext, new String[]{mPermissionSet.get(position).permissionName}, position);
+                    Log.d("CheckedChanged", String.valueOf(mPermissionEntitySet.size()) + "," + String.valueOf(position));
+                    ActivityCompat.requestPermissions((Activity) mContext, new String[]{mPermissionEntitySet.get(position).permissionName}, position);
                 }
             });
         } else {
@@ -63,17 +63,17 @@ public class PermissionAdapter extends BaseAdapter {
 
     }
 
-    public void setList(ArrayList<Permission> permissionSet) {
-        mPermissionSet = permissionSet;
+    public void setList(ArrayList<PermissionEntity> permissionEntitySet) {
+        mPermissionEntitySet = permissionEntitySet;
     }
     @Override
     public int getCount() {
-        return mPermissionSet.size();
+        return mPermissionEntitySet.size();
     }
 
     @Override
-    public Permission getItem(int position) {
-        return mPermissionSet.get(position);
+    public PermissionEntity getItem(int position) {
+        return mPermissionEntitySet.get(position);
     }
 
     @Override
@@ -81,12 +81,12 @@ public class PermissionAdapter extends BaseAdapter {
         return position;
     }
 
-    public void addItem(Permission permission){
-        mPermissionSet.add(permission);
+    public void addItem(PermissionEntity permissionEntity){
+        mPermissionEntitySet.add(permissionEntity);
     }
 
     public void deleteItem(int position) {
-        mPermissionSet.remove(position);
+        mPermissionEntitySet.remove(position);
     }
 
 

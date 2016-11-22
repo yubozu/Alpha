@@ -44,7 +44,6 @@ public class RegisterPresenter {
     }
 
     private void startRegister(UserInfoEntity userInfo) {
-//        调用model的注册模块新增用户
         Subscriber<AuthEntity> subscriber = new Subscriber<AuthEntity>() {
             @Override
             public void onCompleted() {

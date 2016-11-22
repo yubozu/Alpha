@@ -1,14 +1,14 @@
-package cn.ac.ict.alpha.models;
+package cn.ac.ict.alpha.Entities;
 
 /**
  * Author: saukymo
  * Date: 9/12/16
  */
-public class Permission {
+public class PermissionEntity {
     public final String permissionName;
     public Boolean permissionStatus;
 
-    public Permission(String permission) {
+    public PermissionEntity(String permission) {
         permissionName = permission;
         permissionStatus = true;
     }

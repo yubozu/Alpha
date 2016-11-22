@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
@@ -69,5 +70,14 @@ public class MedicineActivity extends BaseActivity {
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         int vis = b?View.VISIBLE:View.INVISIBLE;
         llMedicineTime.setVisibility(vis);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
