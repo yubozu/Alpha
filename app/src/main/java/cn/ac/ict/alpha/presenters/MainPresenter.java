@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import cn.ac.ict.alpha.Utils.FileUtils;
 import cn.ac.ict.alpha.activities.MainActivity;
 
+import static java.util.UUID.randomUUID;
+
 /**
  * Author: yangxiaodong
  * Date: 11/16/16
@@ -40,6 +42,7 @@ public class MainPresenter {
         editor.putString("tappingScore","-1");
         editor.putString("strideScore","-1");
         editor.putBoolean("takingMed",false);
+        editor.putString("UUID",randomUUID().toString());
         editor.putInt("lastTaken",0);
         editor.apply();
         FileUtils.initFileDir(mMainView);

@@ -28,7 +28,7 @@ public class FileUtils {
     }
     public static void initFileDir(Context context)
     {
-        String[] filePaths={"memoryFilePath","standSFilePath","faceFilePath","soundFilePath","tappingFilePath","strideFilePath"};
+        String[] filePaths={"memoryFilePath","standFilePath","faceFilePath","soundFilePath","tappingFilePath","strideFilePath"};
         SharedPreferences sharedPreferences = context.getSharedPreferences("Alpha",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         for (String s:filePaths) {
