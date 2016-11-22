@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
+import com.umeng.analytics.MobclickAgent;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.ac.ict.alpha.R;
@@ -83,5 +85,14 @@ public class UserInfoActivity extends BaseActivity{
     @Override
     public void onBackPressed() {
         startActivity(MainActivity.class);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

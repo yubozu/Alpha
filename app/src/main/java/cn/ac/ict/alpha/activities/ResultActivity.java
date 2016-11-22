@@ -5,6 +5,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -19,7 +21,7 @@ public class ResultActivity extends BaseActivity {
     public static final String TAG = "ResultActivity";
     @BindView(R.id.lv_test_results)
     ListView lvTestResults;
-//    @BindView(R.id.bt_evaluate_self)
+    //    @BindView(R.id.bt_evaluate_self)
 //    Button btEvaSelf;
     @BindView(R.id.bt_upload)
     Button btUpload;
@@ -42,11 +44,11 @@ public class ResultActivity extends BaseActivity {
         //TODO: get data form m ResultPresenter
         mResultPresenter.loadTestData();
     }
-    public void onTestDataLoaded(ArrayList  list,String startTime,String endTime)
-    {
+
+    public void onTestDataLoaded(ArrayList list, String startTime, String endTime) {
         ResultAdapter adapter = new ResultAdapter(ResultActivity.this, list);
         lvTestResults.setAdapter(adapter);
-        tvGuide.setText(String.format(getString(R.string.guide_info),startTime,endTime,list.size()));
+        tvGuide.setText(String.format(getString(R.string.guide_info), startTime, endTime, list.size()));
     }
 //    @OnClick(R.id.bt_evaluate_self)
 //    public void onClick(View view) {
@@ -68,7 +70,7 @@ public class ResultActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        sweetAlertDialog = new SweetAlertDialog(ResultActivity.this,SweetAlertDialog.WARNING_TYPE);
+        sweetAlertDialog = new SweetAlertDialog(ResultActivity.this, SweetAlertDialog.WARNING_TYPE);
         sweetAlertDialog.setTitleText("退出")
                 .setContentText("确定退出评估吗？")
                 .setConfirmText("是的")
@@ -90,12 +92,11 @@ public class ResultActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        if(sweetAlertDialog!=null&&sweetAlertDialog.isShowing())
-        {
+        if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
             sweetAlertDialog.dismiss();
         }
         super.onPause();
-
+        MobclickAgent.onPause(this);
     }
 
     private void startUpload() {
@@ -115,5 +116,10 @@ public class ResultActivity extends BaseActivity {
     }
 
     public void onCompleted() {
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
     }
 }

@@ -38,6 +38,7 @@ dependencies {
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
     compile 'com.bcgdv.asia.lib:ticktock:1.2'
     compile 'com.github.eluleci:flatui:3.0.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile files('src/main/java/cn/ac/ict/alpha/Utils/JKalman.jar')

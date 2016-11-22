@@ -15,10 +15,10 @@ public class FileUtils {
     public static String getFilePath(Context context, String type) {
         String ext;
         switch (type) {
-            case "Face":
+            case "face":
                 ext = ".mp4";
                 break;
-            case "Sound":
+            case "sound":
                 ext = ".3gp";
                 break;
             default:
