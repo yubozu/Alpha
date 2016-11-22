@@ -43,8 +43,9 @@ public class GoActivity extends Activity {
     GyroEventListener gyroEventListener;
     ArrayList<FloatVector> accFloatVectors;
     ArrayList<FloatVector> gyroFloatVectors;
-
+    String TAG = "GoActivity";
     SweetAlertDialog sweetAlertDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,22 +129,22 @@ public class GoActivity extends Activity {
         @Override
         public void onClick(View v) {
             stop();
-            saveToStorage(accFloatVectors,gyroFloatVectors);
-            //TODO: complete the eva
-            sweetAlertDialog = new SweetAlertDialog(GoActivity.this,SweetAlertDialog.SUCCESS_TYPE);
+            saveToStorage(accFloatVectors, gyroFloatVectors);
+            sweetAlertDialog = new SweetAlertDialog(GoActivity.this, SweetAlertDialog.SUCCESS_TYPE);
             sweetAlertDialog.setTitleText("测试完成！")
-                    .setContentText("点击确定进行下一项测试")
+                    .setContentText("点击完成测试")
                     .setConfirmText("确定")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             startActivity(new Intent(GoActivity.this, ResultActivity.class));
-                            SharedPreferences.Editor editor = getSharedPreferences("Alpha",MODE_PRIVATE).edit();
-                            editor.putLong("endTime",System.currentTimeMillis());
+                            SharedPreferences.Editor editor = getSharedPreferences("Alpha", MODE_PRIVATE).edit();
+                            editor.putLong("endTime", System.currentTimeMillis());
                             editor.apply();
                             finish();
                         }
                     });
+            sweetAlertDialog.setCancelable(false);
             sweetAlertDialog.show();
         }
     }
@@ -168,15 +169,19 @@ public class GoActivity extends Activity {
             mp = null;
 
         }
+
         stop();
-        finish();
+        if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
+            sweetAlertDialog.dismiss();
+        }
         super.onPause();
     }
 
-    public void saveToStorage(ArrayList<FloatVector> accList,ArrayList<FloatVector> gyroList) {
+    public void saveToStorage(ArrayList<FloatVector> accList, ArrayList<FloatVector> gyroList) {
         SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
 
         String filePath = FileUtils.getFilePath(this, "stride");
+        Log.d(TAG, "saveToStorage: "+filePath);
         // Example: How to write data to file.
         File file = new File(filePath);
         try {
@@ -202,7 +207,7 @@ public class GoActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("strideFilePath", filePath);
-        editor.putString("strideScore",String.format("%1.1f",getScore()));
+        editor.putString("strideScore", String.format("%1.1f", getScore()));
         editor.apply();
     }
 

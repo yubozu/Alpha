@@ -3,9 +3,10 @@ package cn.ac.ict.alpha.presenters;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.io.File;
-
+import cn.ac.ict.alpha.Utils.FileUtils;
 import cn.ac.ict.alpha.activities.MainActivity;
+
+import static java.util.UUID.randomUUID;
 
 /**
  * Author: yangxiaodong
@@ -41,15 +42,10 @@ public class MainPresenter {
         editor.putString("tappingScore","-1");
         editor.putString("strideScore","-1");
         editor.putBoolean("takingMed",false);
+        editor.putString("UUID",randomUUID().toString());
         editor.putInt("lastTaken",0);
         editor.apply();
-        String dir = mMainView.getFilesDir().getAbsolutePath()+"/tempData";
-        File fdir = new File(dir);
-        if(fdir.exists())
-        {
-            fdir.delete();
-        }
-        fdir.mkdirs();
+        FileUtils.initFileDir(mMainView);
     }
 
     public void logout() {

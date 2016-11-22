@@ -1,49 +1,47 @@
 package cn.ac.ict.alpha.activities.tapper;
 
+import java.util.ArrayList;
+
+import cn.ac.ict.alpha.Utils.MathUtils;
+
 /**
  * Author: saukymo
  * Date: 9/28/16
  */
 
 public class TapperEvaluation {
-    public TapperEvaluation() {
-
+    public static double evaluation(ArrayList<Boolean> indicatior, ArrayList<Long> timestamps)
+    {
+        // TODO:
+        return indicatior.size()/100.0;
+    }
+    public static double eva_order(ArrayList<Boolean> indicatior)
+    {
+        int same = 0;
+        int oppo = 0;
+        boolean prevPress = indicatior.get(0);
+        for(int i = 1;i<indicatior.size();i++)
+        {
+            boolean currentPress = indicatior.get(i);
+            if(currentPress==prevPress)
+            {
+                same++;
+            }else{
+                oppo++;
+            }
+        }
+        return (double)oppo/(double)(same+oppo);
+    }
+    public static double a_harmonic(ArrayList<Long> timestamps)
+    {
+        ArrayList<Long> times = new ArrayList<>();
+        for(int i=1;i<times.size();i++)
+        {
+            times.add(timestamps.get(i)-times.get(i-1));
+        }
+        double mean  = MathUtils.mean_long(times);
+        double std = MathUtils.std_long(times);
+        return 0.0d;
     }
 
-//    static public String evaluation(History history,Context context){
-//
-//        boolean isRight = false;
-//        ArrayList<Integer> handList = new ArrayList<>();
-//        ArrayList<Long> timeList = new ArrayList<>();
-////        Do something here.
-//        try {
-//            FileReader reader = new FileReader(history.filePath);
-//            BufferedReader br = new BufferedReader(reader);
-//            String line = br.readLine();
-//            isRight = Boolean.parseBoolean(line);
-//            line = br.readLine();
-//            while(line!=null && !line.isEmpty())
-//            {
-//                if(line.startsWith("left"))
-//                {
-//                    handList.add(0);
-//
-//                }else if (line.startsWith("right"))
-//                {
-//                    handList.add(1);
-//                }
-//                String[] t = line.split(":");
-//                timeList.add(Long.parseLong(t[1].trim()));
-//
-//                line = br.readLine();
-//
-//            }
-//
-//        }catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//        return context.getString(R.string.default_feedback);
-//    }
 }

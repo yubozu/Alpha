@@ -26,6 +26,7 @@ import java.util.Calendar;
 import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.FileUtils;
 import cn.ac.ict.alpha.Utils.FloatVector;
+import cn.ac.ict.alpha.Utils.MathUtils;
 import cn.ac.ict.alpha.activities.face.FaceMainActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -230,9 +231,15 @@ public class StandTestingActivity extends Activity {
         editor.putString("standScore",String.format("%1.1f",getScore(accVectors,gyroVectors)));
         editor.apply();
     }
-    private double getScore(ArrayList accVectors, ArrayList gyroVectors)
+    private double getScore(ArrayList<FloatVector> accVectors, ArrayList<FloatVector> gyroVectors)
     {
         // TODO:
-        return 0f;
+        float accFloat = 0f;
+        if(accVectors!=null&&!accVectors.isEmpty())
+        {
+            float[] stds = MathUtils.std(accVectors);
+            accFloat = MathUtils.max(stds)[1];
+        }
+        return accFloat;
     }
 }

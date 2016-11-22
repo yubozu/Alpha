@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.FileUtils;
-import cn.ac.ict.alpha.activities.face.FaceMainActivity;
 import cn.ac.ict.alpha.activities.stride.StrideMainActivity;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -44,7 +43,8 @@ public class TapperTestingActivity extends Activity {
     TickTockView ttv;
 
     private int leftCount, rightCount;
-    private ArrayList<String> content;
+    private ArrayList<Long> content;
+    private ArrayList<Boolean> indicator;
     SweetAlertDialog sweetAlertDialog = null;
     private boolean isRight = false;
     MediaPlayer mp;
@@ -53,7 +53,8 @@ public class TapperTestingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tapper_testing);
         ButterKnife.bind(this);
-        content = new ArrayList<>();
+        content = new ArrayList<Long>();
+        indicator = new ArrayList<Boolean>();
         isRight = getIntent().getBooleanExtra("isRight",true);
         mp = MediaPlayer.create(getApplicationContext(), R.raw.countdown);
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -88,14 +89,13 @@ public class TapperTestingActivity extends Activity {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    startActivity(new Intent(TapperTestingActivity.this, FaceMainActivity.class));
+                                    startActivity(new Intent(TapperTestingActivity.this, StrideMainActivity.class));
                                     finish();
                                 }
                             });
+                    sweetAlertDialog.setCancelable(false);
                     sweetAlertDialog.show();
-                    //TODO: next test
-                    startActivity(new Intent(TapperTestingActivity.this, StrideMainActivity.class));
-                    finish();
+
                   //  startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 }
                 return String.valueOf(timeRemainingInMillis/1000+1);
@@ -108,11 +108,13 @@ public class TapperTestingActivity extends Activity {
         switch (view.getId()) {
             case R.id.btn_left:
                 tvLeft.setText(String.valueOf(++leftCount));
-                content.add("left:" + System.currentTimeMillis());
+                indicator.add(false);
+                content.add(System.currentTimeMillis());
                 break;
             case R.id.btn_right:
                 tvRight.setText(String.valueOf(++rightCount));
-                content.add("right:" + System.currentTimeMillis());
+                indicator.add(true);
+                content.add(System.currentTimeMillis());
                 break;
         }
     }
@@ -132,8 +134,17 @@ public class TapperTestingActivity extends Activity {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
             bufferedWriter.write(isRight + "\n");
-            for (String line : content) {
-                bufferedWriter.write(line + "\n");
+            for(int i= 0;i<content.size();i++)
+            {
+                String line = "";
+                if(indicator.get(i))
+                {
+                    line +="right:";
+                }else{
+                    line +="left:";
+                }
+                line+=content.get(i)+"\n";
+                bufferedWriter.write(line);
             }
             //Important! Have a new line in the end of txt file.
             bufferedWriter.newLine();
@@ -145,14 +156,10 @@ public class TapperTestingActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("tappingFilePath", filePath);
-        editor.putString("tappingScore",String.format("%1.1f",getScore()));
+        editor.putString("tappingScore", String.format("%1.1f",TapperEvaluation.evaluation(indicator,content)));
         editor.apply();
     }
 
-    private float getScore() {
-        // TODO: 18/11/2016
-        return 0.0f;
-    }
 
     @Override
     protected void onPause() {

@@ -46,9 +46,18 @@
             android:layout_weight="1"
             android:scrollbars="none" />
 
+        <!--<Button-->
+            <!--android:id="@+id/bt_evaluate_self"-->
+            <!--style="@style/BtnStyle"-->
+            <!--android:text="@string/evaluate_self" />-->
         <Button
-            android:id="@+id/bt_evaluate_self"
+            android:id="@+id/bt_upload"
             style="@style/BtnStyle"
-            android:text="@string/evaluate_self" />
+            android:text="@string/upload"/>
+
+        <Button
+            android:id="@+id/bt_cancel"
+            style="@style/BtnStyle"
+            android:text="@string/cancel"/>
     </LinearLayout>
 </LinearLayout>

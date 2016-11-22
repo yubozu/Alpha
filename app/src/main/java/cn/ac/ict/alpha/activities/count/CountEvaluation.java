@@ -1,8 +1,15 @@
 package cn.ac.ict.alpha.activities.count;
 
-public class CountEvaluation {
-    public CountEvaluation() {
+import java.util.ArrayList;
 
+public class CountEvaluation {
+    public static double CountEvaluation(boolean isRight, ArrayList<String> result) {
+        double score = 0;
+        if(isRight)
+        {
+            score = (5.0-(result.size()-1))/5.0;
+        }
+        return score;
     }
 
 //    static public String evaluation(History history,Context context){
