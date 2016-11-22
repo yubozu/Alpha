@@ -268,13 +268,14 @@ public class StrideWalkingActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("strideFilePath", filePath);
-        editor.putString("strideScore",String.format("%1.1f",getScore()));
+        editor.putString("strideScore",String.format("%1.1f",getScore(accVectors)));
         editor.apply();
     }
 
-    private float getScore() {
+    private float getScore(ArrayList<FloatVector> acc) {
         //TODO:
-        return 0.0f;
+        int test = Pedometer.getStrideNumbers(Pedometer.genKalman(Pedometer.genOneDimension(acc)));
+        return (float)test;
     }
 
     @Override
