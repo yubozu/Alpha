@@ -34,7 +34,7 @@ public class StandMainActivity extends BaseActivity {
 
     private void initWidget() {
         toggleFoot = (ToggleButton) findViewById(R.id.toggle_foot);
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.stand_guide);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.stand);
         mp.start();
     }
 

@@ -76,7 +76,7 @@
 
     <!--memory-->
     <string name="count_tips">\n请您记住接下来出现的数字，选择图片版或语音版进行记忆测试！</string>
-    <string name="eye_count_tip">本测试将在屏幕上连续显示6个数字，请进行记忆并在显示完成后输入答案，共有5次输入机会。</string>
+    <string name="eye_count_tip">本测试将测试您的记忆力。点击开始后，将在屏幕上连续显示6个数字，请在显示完成后输入您所看到的数字，共有5次机会。</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
@@ -95,13 +95,13 @@
     <string name="count_test_version_sound">语音版</string>
     <string name="count_test_version_picture">图片版</string>
     <string name="btn_confirm">确认</string>
-    <string name="eye_count">视觉数字记忆</string>
+    <string name="eye_count">数字记忆测试</string>
     <string name="back_to_medicine">用药情况</string>
 
 
     <!--stand-->
     <string name="stand_image_description">示例图</string>
-    <string name="stand_tips">点击开始测试后，手持设备，双手交叉抱肩，倒计时5秒钟后，测试正式开始，请保持上述姿势，单腿站立10秒钟。左脚和右脚分别完成。</string>
+    <string name="stand_tips">本测试将测试您的身体平衡性。选择抬起脚后，请手持设备，双手在胸前交叉，单脚站立10秒钟。点击开始后，您有5秒钟进行准备。</string>
     <string name="stand_left">左脚</string>
     <string name="stand_right">右脚</string>
     <string name="stand_chooseFoot">请选择抬起脚:</string>
@@ -109,19 +109,19 @@
 
     <!--face-->
     <string name="module_face">面部表情</string>
-    <string name="face_tips">本测试将录制您的面部表情，请将手机上举，录制过程中保持摄像头与您的双眼在同一水平，并保证面部完整的出现在画面中。请仔细聆听语音，按照提示完成相应动作。</string>
+    <string name="face_tips">本测试将录制您的面部表情。请将手机前置相机抬至与双眼同一水平，点击开始后，录像开始，过程中请保证面部完整的出现在画面中，并按照提示完成相应动作。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
     <string name="face_finish_error">视频拍摄失败，错误:</string>
 
     <!--sound-->
-    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时，嘴尽量靠近话筒，距离在5cm以内，如图所示，尽量声音洪亮，准备好后请点击开始录音。</string>
+    <string name="sound_task_1">本测试将测试您的语言能力。点击开始后，将录制您的声音，请按照提示回答问题，回答时尽量靠近话筒。</string>
     <string name="sound_complete">完成</string>
     <string name="sound_recoding">正在录音...</string>
     <array name="SoundQueston">
-        <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
-        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。</item>
+        <item>1.请回答：\n 昨天晚上，您在哪吃的晚餐，吃了些什么?\n\n回答完后请点击下一题</item>
+        <item>2.请持续大声地说出"啊"，持续5秒钟后，点击结束</item>
     </array>
     <string name="btn_start_record">开始录音</string>
     <string name="module_sound">语言能力</string>
@@ -130,14 +130,14 @@
     <!--tapping-->
     <string name="tapper_index_finger">食指</string>
     <string name="tapper_middle_finger">中指</string>
-    <string name="tapper_tips">请用食指和中指以最快的速度，最大幅度交替点击按钮。点击开始测试，倒计时5秒后，测试正式开始。</string>
+    <string name="tapper_tips">本测试将测试您的手指灵活性。选择操作手后，请用食指和中指以尽可能快的速度交替点击按钮，持续10秒钟。点击开始后，您有5秒钟时间准备。</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
     <string name = "tapper_main_hand">请选择测试手:</string>
     <string name = "tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
     <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
-    <string name="module_tapping">手指点击游戏</string>
+    <string name="module_tapping">手指点击测试</string>
     <string name="left_hand">左手</string>
     <string name="right_hand">右手</string>
     <string name="tapping_choose_hand">请选择操作手</string>
@@ -171,9 +171,9 @@
     <string name="stride_btn_text">完成</string>
     <string name="stride_tug_btn">Tug测试</string>
     <string name="stride_walking_btn">行走1分钟</string>
-    <string name="stride_walking_tip">请将设备置于胸前，持续行走1分钟，点击开始按钮后5秒钟测试开始。</string>
+    <string name="stride_walking_tip">本测试将测试您的行走能力。请将手机持于胸前，持续行走1分钟，如无法坚持行走，点击结束按钮立即结束。点击开始后，您将有5秒钟准备时间。</string>
     <string name="stride_walking_carryon">若无法坚持行走，请点击结束</string>
-    <string name="module_stride">步态平衡</string>
+    <string name="module_stride">步态测试</string>
     <string name="btn_begin">开始</string>
 
     <!-- permission -->

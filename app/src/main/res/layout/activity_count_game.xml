@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/freebie_9"
     android:gravity="center"
+    android:keepScreenOn="true"
     android:weightSum="1">
 
     <TextView

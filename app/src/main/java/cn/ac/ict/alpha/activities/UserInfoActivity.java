@@ -80,5 +80,8 @@ public class UserInfoActivity extends BaseActivity{
         toast(getString(R.string.saving_failed));
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(MainActivity.class);
+    }
 }

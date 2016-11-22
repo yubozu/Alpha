@@ -34,7 +34,7 @@ public class TapperMainActivity extends BaseActivity {
         startAudioGuide();
     }
     private void startAudioGuide() {
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.tapper_guide);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.tapping);
         mp.start();
     }
     @Override

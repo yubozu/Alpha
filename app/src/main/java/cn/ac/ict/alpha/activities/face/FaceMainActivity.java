@@ -30,7 +30,7 @@ public class FaceMainActivity extends BaseActivity {
     }
 
     private void initWidget() {
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.face_guide);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.face);
         mp.start();
 
     }

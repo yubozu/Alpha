@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sound_main, container, false);
         ButterKnife.bind(this, view);
         mActivity = (SoundMainActivity) getActivity();
-        mp = MediaPlayer.create(mActivity.getApplicationContext(), R.raw.sound_guide);
+        mp = MediaPlayer.create(mActivity.getApplicationContext(), R.raw.sound);
         mp.start();
         return view;
     }

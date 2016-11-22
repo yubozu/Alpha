@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:keepScreenOn="true">
 	<cn.ac.ict.alpha.activities.face.view.VideoCaptureView
 		android:id="@+id/videocapture_videocaptureview_vcv"
 		android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.presenters.PasswordPresenter;
 
 /**
- * Author: saukymo
+// * Author: saukymo
  * Date: 11/20/16
  */
 
@@ -72,5 +72,10 @@ public class PasswordActivity extends BaseActivity{
     public void onSaveFailed() {
         hideProgress();
         toast(getString(R.string.saving_failed));
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(MainActivity.class);
     }
 }
