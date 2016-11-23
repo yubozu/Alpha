@@ -7,8 +7,8 @@ package cn.ac.ict.alpha.Utils;
 public class BaseResult {
     int type;
     String resultPath;
-    float score;
-    public BaseResult(String resultPath, float score, int type) {
+    String score;
+    public BaseResult(String resultPath, String score, int type) {
         this.resultPath = resultPath;
         this.score = score;
         this.type = type;
@@ -22,11 +22,11 @@ public class BaseResult {
         this.resultPath = resultPath;
     }
 
-    public float getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(float score) {
+    public void setScore(String score) {
         this.score = score;
     }
 

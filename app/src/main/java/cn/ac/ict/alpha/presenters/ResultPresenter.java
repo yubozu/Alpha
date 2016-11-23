@@ -42,8 +42,8 @@ public class ResultPresenter {
         ArrayList<BaseResult> results = new ArrayList<>();
         for(int i=0;i<scoreNames.length;i++)
         {
-            float score = Float.parseFloat(sharedPreferences.getString(scoreNames[i],"-1"));
-            if(score==-1)
+            String score = sharedPreferences.getString(scoreNames[i],"-1");
+            if(score.equals("-1"))
                 continue;
 //            int type = i;
             String resultPath = sharedPreferences.getString(scoreNames[i],null);
@@ -75,6 +75,7 @@ public class ResultPresenter {
             public void onNext(UploadResponseEntity uploadResponseEntity) {
                 String status = uploadResponseEntity.getStatus();
                 if (! status.equals("OK")) {
+                    Log.d(TAG, uploadResponseEntity.getError());
                     mResultView.toast(uploadResponseEntity.getError());
                     mResultView.onUploadFailed();
                 }

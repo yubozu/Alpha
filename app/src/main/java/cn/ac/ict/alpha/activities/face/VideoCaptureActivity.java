@@ -29,10 +29,8 @@ import android.os.Message;
 import android.provider.MediaStore.Video.Thumbnails;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,13 +54,13 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
     private String TAG = "VideoCaptureActivity";
     public static final int RESULT_ERROR = 753245;
 
-    public static final String EXTRA_OUTPUT_FILENAME = "com.jmolsmobile.extraoutputfilename";
-    public static final String EXTRA_CAPTURE_CONFIGURATION = "com.jmolsmobile.extracaptureconfiguration";
-    public static final String EXTRA_ERROR_MESSAGE = "com.jmolsmobile.extraerrormessage";
-    public static final String EXTRA_SHOW_TIMER = "com.jmolsmobile.extrashowtimer";
-
-    private static final String SAVED_RECORDED_BOOLEAN = "com.jmolsmobile.savedrecordedboolean";
-    protected static final String SAVED_OUTPUT_FILENAME = "com.jmolsmobile.savedoutputfilename";
+//    public static final String EXTRA_OUTPUT_FILENAME = "com.jmolsmobile.extraoutputfilename";
+//    public static final String EXTRA_CAPTURE_CONFIGURATION = "com.jmolsmobile.extracaptureconfiguration";
+//    public static final String EXTRA_ERROR_MESSAGE = "com.jmolsmobile.extraerrormessage";
+//    public static final String EXTRA_SHOW_TIMER = "com.jmolsmobile.extrashowtimer";
+//
+//    private static final String SAVED_RECORDED_BOOLEAN = "com.jmolsmobile.savedrecordedboolean";
+//    protected static final String SAVED_OUTPUT_FILENAME = "com.jmolsmobile.savedoutputfilename";
 
     private boolean mVideoRecorded = false;
     VideoFile mVideoFile = null;
@@ -78,7 +76,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
     Handler mHandler;
     TimerTask tt;
     int i = 0;
-    ImageView iv_bt;
+//    ImageView iv_bt;
     boolean flag = false;
 
     @Override
@@ -89,7 +87,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
         setContentView(R.layout.activity_face_videocapture);
         initializeCaptureConfiguration(savedInstanceState);
         mVideoCaptureView = (VideoCaptureView) findViewById(R.id.videocapture_videocaptureview_vcv);
-        iv_bt = (ImageView) mVideoCaptureView.findViewById(R.id.videocapture_recordbtn_iv);
+//        iv_bt = (ImageView) mVideoCaptureView.findViewById(R.id.videocapture_recordbtn_iv);
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -110,7 +108,11 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
                         if (timer != null)
                             timer.cancel();
                         flag = true;
-                        onRecordingSuccess();
+                        try {
+                            mVideoRecorder.toggleRecording();
+                        } catch (AlreadyUsedException e) {
+                            Log.d(CLog.ACTIVITY, "Cannot toggle recording after cleaning up all resources");
+                        }
                     default:
                         break;
                 }
@@ -134,7 +136,6 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
                         mVideoRecorder.toggleRecording();
                     } catch (AlreadyUsedException e) {
                         Log.d(CLog.ACTIVITY, "Cannot toggle recording after cleaning up all resources");
-                        finishWithError();
                     }
 //                    onRecordingStarted();
                     timer = new Timer(true);
@@ -188,7 +189,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
 
         tvHint.setText(getString(R.string.face_task_1));
         tvHint.getBackground().setAlpha(100);
-        iv_bt.setVisibility(View.INVISIBLE);
+//        iv_bt.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 if (mp1 != null)
@@ -209,7 +210,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
         Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         mVideoRecorder = new VideoRecorder(this, mCaptureConfiguration, mVideoFile, new CameraWrapper(new NativeCamera(), display.getRotation()), mVideoCaptureView.getPreviewSurfaceHolder());
         // mVideoCaptureView.setRecordingButtonInterface(this);
-        boolean showTimer = this.getIntent().getBooleanExtra(EXTRA_SHOW_TIMER, true);
+        boolean showTimer = true;
         mVideoCaptureView.showTimer(showTimer);
 //        if (mVideoRecorded) {
 //            mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
@@ -224,9 +225,9 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
         if (sweetAlertDialog != null && sweetAlertDialog.isShowing()) {
             sweetAlertDialog.dismiss();
         }
-        if (mVideoRecorder != null) {
-            mVideoRecorder.stopRecording(null);
-        }
+//        if (mVideoRecorder != null) {
+//            mVideoRecorder.stopRecording(null);
+//        }
         if (tt != null) {
             tt.cancel();
             tt = null;
@@ -252,14 +253,15 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
             timer.cancel();
             timer = null;
         }
-        releaseAllResources();
+//        releaseAllResources();
         //iv_bt.performClick();
-        finishCancelled();
     }
 
     @Override
     protected void onPause() {
+
         finishWithError();
+
         super.onPause();
     }
 
@@ -297,7 +299,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
         }
 
 //        mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
-        releaseAllResources();
+
     }
 
     @Override
@@ -305,7 +307,6 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
         mVideoRecorded = true;
         mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
         finishCompleted();
-        releaseAllResources();
     }
 
     @Override
@@ -326,7 +327,6 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             startActivity(new Intent(VideoCaptureActivity.this, SoundMainActivity.class));
-                            finish();
                         }
                     });
             sweetAlertDialog.show();
@@ -345,9 +345,6 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
     private void finishError(final String message) {
         //  Toast.makeText(getApplicationContext(), getString(R.string.face_finish_error) + message, Toast.LENGTH_LONG).show();
         finishWithError();
-        final Intent result = new Intent();
-        result.putExtra(EXTRA_ERROR_MESSAGE, message);
-        this.setResult(RESULT_ERROR, result);
         finish();
     }
 
@@ -366,28 +363,30 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
     }
 
     protected CaptureConfiguration generateCaptureConfiguration() {
-        CaptureConfiguration returnConfiguration = this.getIntent().getParcelableExtra(EXTRA_CAPTURE_CONFIGURATION);
-        if (returnConfiguration == null) {
-            returnConfiguration = new CaptureConfiguration();
-            CLog.d(CLog.ACTIVITY, "No captureconfiguration passed - using default configuration");
-        }
-        return returnConfiguration;
+//        CaptureConfiguration returnConfiguration = this.getIntent().getParcelableExtra(EXTRA_CAPTURE_CONFIGURATION);
+//        if (returnConfiguration == null) {
+//            returnConfiguration = new CaptureConfiguration();
+//            CLog.d(CLog.ACTIVITY, "No captureconfiguration passed - using default configuration");
+//        }
+//        return returnConfiguration;
+        return new CaptureConfiguration();
     }
 
     private boolean generateVideoRecorded(final Bundle savedInstanceState) {
         if (savedInstanceState == null) return false;
-        return savedInstanceState.getBoolean(SAVED_RECORDED_BOOLEAN, false);
+        return true;
+//        return savedInstanceState.getBoolean(SAVED_RECORDED_BOOLEAN, false);
     }
 
     protected VideoFile generateOutputFile(Bundle savedInstanceState) {
-        VideoFile returnFile;
-        if (savedInstanceState != null) {
-            returnFile = new VideoFile(this, savedInstanceState.getString(SAVED_OUTPUT_FILENAME));
-        } else {
-            returnFile = new VideoFile(this, this.getIntent().getStringExtra(EXTRA_OUTPUT_FILENAME));
-        }
-        // TODO: add checks to see if outputfile is writeable
-        return returnFile;
+//        VideoFile returnFile;
+//        if (savedInstanceState != null) {
+//            returnFile = new VideoFile(this, savedInstanceState.getString(SAVED_OUTPUT_FILENAME));
+//        } else {
+//            returnFile = new VideoFile(this, this.getIntent().getStringExtra(EXTRA_OUTPUT_FILENAME));
+//        }
+        return new VideoFile(this,FileUtils.getFilePath(this,"face"));
+//        return returnFile;
     }
 
     public Bitmap getVideoThumbnail() {
@@ -400,7 +399,7 @@ public class VideoCaptureActivity extends Activity implements VideoRecorderInter
     }
 
     public void saveToStorage() {
-
+        releaseAllResources();
         Log.d(TAG, "saveToStorage: ");
         SharedPreferences sharedPreferences = getSharedPreferences("Alpha", Context.MODE_PRIVATE);
         String filePath = FileUtils.getFilePath(this, "face");

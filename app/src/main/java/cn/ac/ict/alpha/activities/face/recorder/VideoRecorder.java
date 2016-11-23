@@ -203,18 +203,25 @@ public class VideoRecorder implements OnInfoListener, CapturePreviewInterface {
     }
 
     private void releaseRecorderResources() {
+        CLog.d(CLog.RECORDER, "recorder release");
         MediaRecorder recorder = getMediaRecorder();
+        CLog.d(CLog.RECORDER, "get recorder");
         if (recorder != null) {
+            CLog.d(CLog.RECORDER, "release recorder");
             recorder.release();
+            CLog.d(CLog.RECORDER, "set recorder = null");
             setMediaRecorder(null);
         }
     }
 
     public void releaseAllResources() {
+        CLog.d(CLog.RECORDER, "start Released all resources");
         if (mVideoCapturePreview != null) {
+            CLog.d(CLog.RECORDER, "mVideoCapturePreview release");
             mVideoCapturePreview.releasePreviewResources();
         }
         if (mCameraWrapper != null) {
+            CLog.d(CLog.RECORDER, "mCameraWrapper release");
             mCameraWrapper.releaseCamera();
             mCameraWrapper = null;
         }

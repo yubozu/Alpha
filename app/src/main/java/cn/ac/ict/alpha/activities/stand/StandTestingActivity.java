@@ -228,7 +228,7 @@ public class StandTestingActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("standFilePath", filePath);
-        editor.putString("standScore",String.format("%1.1f",getScore(accVectors,gyroVectors)));
+        editor.putString("standScore",String.valueOf(getScore(accVectors,gyroVectors)));
         editor.apply();
     }
     private double getScore(ArrayList<FloatVector> accVectors, ArrayList<FloatVector> gyroVectors)

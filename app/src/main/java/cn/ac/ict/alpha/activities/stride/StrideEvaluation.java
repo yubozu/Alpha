@@ -1,14 +1,38 @@
 package cn.ac.ict.alpha.activities.stride;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+
+import cn.ac.ict.alpha.R;
+import cn.ac.ict.alpha.Utils.FloatVector;
+
 /**
  * Author: saukymo
  * Date: 9/28/16
  */
 
 public class StrideEvaluation {
-    public StrideEvaluation() {
-
+public static String rank(Context context, ArrayList<FloatVector> accVector)
+{
+    int step = Pedometer.getStrideNumbers(Pedometer.genKalman(Pedometer.genOneDimension(accVector)));
+    String[] rank = context.getResources().getStringArray(R.array.rank);
+    if(step>=90)
+    {
+        return rank[0];
     }
+    if(step>=70){
+        return rank[1];
+    }
+    if(step>=50)
+    {
+        return rank[2];
+    }
+    else
+    {
+        return rank[3];
+    }
+}
 
 //    static public String evaluation(History history,Context context){
 //        boolean isAcc = FALSE;

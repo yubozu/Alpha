@@ -219,6 +219,8 @@ public class StrideWalkingActivity extends Activity {
 
     @Override
     protected void onPause() {
+        if(sweetAlertDialog!=null&&sweetAlertDialog.isShowing())
+            sweetAlertDialog.dismiss();
         if(mpGuide!=null)
         {
             mpGuide.stop();
@@ -268,7 +270,7 @@ public class StrideWalkingActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("strideFilePath", filePath);
-        editor.putString("strideScore",String.format("%1.1f",getScore(accVectors)));
+        editor.putString("strideScore",String.valueOf(getScore(accVectors)));
         editor.apply();
     }
 
@@ -283,4 +285,5 @@ public class StrideWalkingActivity extends Activity {
         startActivity(new Intent(StrideWalkingActivity.this,StrideMainActivity.class));
         finish();
     }
+
 }

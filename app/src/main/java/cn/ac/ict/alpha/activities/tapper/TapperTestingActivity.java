@@ -156,7 +156,7 @@ public class TapperTestingActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("tappingFilePath", filePath);
-        editor.putString("tappingScore", String.format("%1.1f",TapperEvaluation.evaluation(indicator,content)));
+        editor.putString("tappingScore", String.valueOf(TapperEvaluation.evaluation(indicator,content)));
         editor.apply();
     }
 

@@ -1,14 +1,44 @@
 package cn.ac.ict.alpha.activities.stand;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+
+import cn.ac.ict.alpha.R;
+import cn.ac.ict.alpha.Utils.FloatVector;
+import cn.ac.ict.alpha.Utils.MathUtils;
+
 /**
  * Author: saukymo
  * Date: 9/28/16
  */
 
 public class StandEvaluation {
-    public StandEvaluation() {
-
+public static String rank(Context context, ArrayList<FloatVector> accVectors)
+{
+    String[] rank = context.getResources().getStringArray(R.array.rank);
+    float accFloat = 0f;
+    if(accVectors!=null&&!accVectors.isEmpty())
+    {
+        float[] stds = MathUtils.std(accVectors);
+        accFloat = MathUtils.max(stds)[1];
     }
+    if(accFloat<=0.8)
+    {
+        return rank[0];
+    }
+    if(accFloat<=1)
+    {
+        return rank[1];
+    }
+    if(accFloat<=1.2)
+    {
+        return rank[2];
+    }else
+    {
+        return rank[3];
+    }
+}
 
 //    static public String evaluation(History history,Context context){
 //        boolean isRight = false;

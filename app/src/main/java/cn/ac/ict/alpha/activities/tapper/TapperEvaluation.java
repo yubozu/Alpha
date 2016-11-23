@@ -1,7 +1,10 @@
 package cn.ac.ict.alpha.activities.tapper;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
+import cn.ac.ict.alpha.R;
 import cn.ac.ict.alpha.Utils.MathUtils;
 
 /**
@@ -13,7 +16,27 @@ public class TapperEvaluation {
     public static double evaluation(ArrayList<Boolean> indicatior, ArrayList<Long> timestamps)
     {
         // TODO:
-        return indicatior.size()/100.0;
+        return indicatior.size();
+    }
+    public static String rank(Context context, ArrayList<Boolean> indicatior)
+    {
+        int count = indicatior.size();
+        String[] rank = context.getResources().getStringArray(R.array.rank);
+        if(count>=80)
+        {
+            return rank[0];
+        }
+        if(count>=60)
+        {
+            return rank[1];
+        }
+        if(count>=40)
+        {
+            return rank[2];
+        }
+        else{
+            return rank[3];
+        }
     }
     public static double eva_order(ArrayList<Boolean> indicatior)
     {

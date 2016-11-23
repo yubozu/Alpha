@@ -104,7 +104,7 @@ public class SoundMainActivity extends FragmentActivity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("soundFilePath", filePath);
-        editor.putString("soundScore", String.format("%1.1f", getScore()));
+        editor.putString("soundScore", "0");
         editor.apply();
     }
 

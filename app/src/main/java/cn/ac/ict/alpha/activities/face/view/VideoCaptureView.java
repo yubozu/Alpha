@@ -34,9 +34,9 @@ import cn.ac.ict.alpha.R;
 
 public class VideoCaptureView extends FrameLayout {
 
-    private ImageView mDeclineBtnIv;
-    private ImageView mAcceptBtnIv;
-    private ImageView mRecordBtnIv;
+//    private ImageView mDeclineBtnIv;
+//    private ImageView mAcceptBtnIv;
+//    private ImageView mRecordBtnIv;
     private SurfaceView mSurfaceView;
     private ImageView mThumbnailIv;
     private TextView mTimerTv;
@@ -67,9 +67,9 @@ public class VideoCaptureView extends FrameLayout {
 	private void initialize(Context context) {
 		final View videoCapture = View.inflate(context, R.layout.view_face_videocapture, this);
 
-		mRecordBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_recordbtn_iv);
-		mAcceptBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_acceptbtn_iv);
-		mDeclineBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_declinebtn_iv);
+//		mRecordBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_recordbtn_iv);
+//		mAcceptBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_acceptbtn_iv);
+//		mDeclineBtnIv = (ImageView) videoCapture.findViewById(R.id.videocapture_declinebtn_iv);
 
 //		mRecordBtnIv.setOnClickListener(this);
 //		mAcceptBtnIv.setOnClickListener(this);
@@ -90,10 +90,10 @@ public class VideoCaptureView extends FrameLayout {
 	}
 
 	public void updateUINotRecording() {
-		mRecordBtnIv.setSelected(false);
-		mRecordBtnIv.setVisibility(View.VISIBLE);
-		mAcceptBtnIv.setVisibility(View.GONE);
-		mDeclineBtnIv.setVisibility(View.GONE);
+//		mRecordBtnIv.setSelected(false);
+//		mRecordBtnIv.setVisibility(View.VISIBLE);
+//		mAcceptBtnIv.setVisibility(View.GONE);
+//		mDeclineBtnIv.setVisibility(View.GONE);
 		mThumbnailIv.setVisibility(View.GONE);
 		mSurfaceView.setVisibility(View.VISIBLE);
 	}
@@ -110,10 +110,10 @@ public class VideoCaptureView extends FrameLayout {
     };
 
     public void updateUIRecordingOngoing() {
-        mRecordBtnIv.setSelected(true);
+     //   mRecordBtnIv.setSelected(true);
        // mRecordBtnIv.setVisibility(View.VISIBLE);
-        mAcceptBtnIv.setVisibility(View.GONE);
-        mDeclineBtnIv.setVisibility(View.GONE);
+       // mAcceptBtnIv.setVisibility(View.GONE);
+        //mDeclineBtnIv.setVisibility(View.GONE);
         mThumbnailIv.setVisibility(View.GONE);
         mSurfaceView.setVisibility(View.VISIBLE);
         if (mShowTimer) {

@@ -1,6 +1,10 @@
 package cn.ac.ict.alpha.activities.count;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+
+import cn.ac.ict.alpha.R;
 
 public class CountEvaluation {
     public static double CountEvaluation(boolean isRight, ArrayList<String> result) {
@@ -11,7 +15,25 @@ public class CountEvaluation {
         }
         return score;
     }
-
+    public static String rank(Context context, boolean isRight, ArrayList<String> result)
+    {
+        double score =  CountEvaluation(isRight, result);
+        String[] rank_str = context.getResources().getStringArray(R.array.rank);
+        if (score>=0.8)
+        {
+            return rank_str[0];
+        }
+        if(score>=0.6)
+        {
+            return rank_str[1];
+        }
+        if(score>=0.2)
+        {
+            return rank_str[2];
+        }else{
+            return rank_str[3];
+        }
+    }
 //    static public String evaluation(History history,Context context){
 //
 ////        Do something here.

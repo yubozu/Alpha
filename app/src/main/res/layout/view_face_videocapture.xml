@@ -54,43 +54,43 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-    <ImageView
-        android:id="@+id/videocapture_recordbtn_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="-20dp"
-        android:background="@drawable/states_face_btn_capture"
-        android:clickable="true"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/videocapture_recordbtn_iv"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginRight="-20dp"-->
+        <!--android:background="@drawable/states_face_btn_capture"-->
+        <!--android:clickable="true"/>-->
 
-    <ImageView
-        android:id="@+id/videocapture_acceptbtn_iv"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_above="@id/videocapture_recordbtn_iv"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:background="@drawable/states_face_btn_acceptdecline"
-        android:clickable="true"
-        android:padding="8dp"
-        android:src="@drawable/btn_face_accept"
-        android:visibility="gone"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/videocapture_acceptbtn_iv"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_above="@id/videocapture_recordbtn_iv"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:background="@drawable/states_face_btn_acceptdecline"-->
+        <!--android:clickable="true"-->
+        <!--android:padding="8dp"-->
+        <!--android:src="@drawable/btn_face_accept"-->
+        <!--android:visibility="gone"/>-->
 
-    <ImageView
-        android:id="@+id/videocapture_declinebtn_iv"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+    <!--<ImageView-->
+        <!--android:id="@+id/videocapture_declinebtn_iv"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentBottom="true"-->
 
 
-        android:layout_margin="10dp"
-        android:background="@drawable/states_face_btn_acceptdecline"
-        android:clickable="true"
-        android:padding="8dp"
-        android:src="@drawable/btn_face_decline"
-        android:visibility="gone"/>
+        <!--android:layout_margin="10dp"-->
+        <!--android:background="@drawable/states_face_btn_acceptdecline"-->
+        <!--android:clickable="true"-->
+        <!--android:padding="8dp"-->
+        <!--android:src="@drawable/btn_face_decline"-->
+        <!--android:visibility="gone"/>-->
 
 </RelativeLayout>

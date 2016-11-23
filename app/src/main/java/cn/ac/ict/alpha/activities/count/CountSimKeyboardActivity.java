@@ -223,7 +223,7 @@ public class CountSimKeyboardActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("memoryFilePath", filePath);
-        editor.putString("memoryScore", String.format("%1.1f", CountEvaluation.CountEvaluation(isRight, result)));
+        editor.putString("memoryScore", String.valueOf(CountEvaluation.CountEvaluation(isRight, result)));
         editor.apply();
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alpha</string>
+    <string name="app_name">PD助手</string>
     <string name="user_name">用户名</string>
     <string name="user_password">密码</string>
     <string name="phone_number">手机号码</string>
@@ -186,5 +186,11 @@
     <string name="permission_denied">权限被拒绝</string>
     <string name="permission_remained">还需要允许%1$d项权限</string>
     <string name="btn_continue">继续</string>
-
+    <string-array name="rank">
+        <item>优秀</item>
+        <item>良好</item>
+        <item>一般</item>
+        <item>值得注意</item>
+    </string-array>
+    <string name="recorded">已录制</string>
 </resources>
